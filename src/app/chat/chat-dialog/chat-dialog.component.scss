@@ -12,7 +12,7 @@
       position: absolute;
       bottom: 0;
       width: 100%;
-      background: mat-color($primary);
+      background: mat-color($background, background);
 
       mat-form-field {
         width: calc(100% - 7rem);
@@ -72,7 +72,7 @@
         line-height: 3.3rem;
         height: 2.5rem;
         color: white;
-        background: #c8c8c8;
+        background: rgba(177, 177, 177, 0.21176470588235294);
         border-radius: 50%;
         text-align: center;
       }
@@ -98,7 +98,7 @@
       }
 
       .chat-message.right > .chat-message-content {
-        background: #C5E1A5;
+        background: rgba(156, 204, 101, 0.47843137254901963);
       }
 
       .chat-message.left > .chat-message-content {
@@ -106,10 +106,10 @@
       }
 
       .chat-message.left > .chat-message-content:before {
-        content: "\A";
+        // content: "";
         border-style: solid;
         border-width: 11px 11px 10px 0;
-        border-color: transparent #eeeeee transparent transparent;
+        border-color: transparent rgba(177, 177, 177, 0.21176470588235294) transparent transparent;
         position: absolute;
         margin-left: -1rem;
         margin-top: -1.08rem;
@@ -117,10 +117,10 @@
       }
 
       .chat-message.right > .chat-message-content:before {
-        content: "\A";
+        // content: "";
         border-style: solid;
         border-width: 10px 15px 10px 0;
-        border-color: transparent #c5e1a5 transparent transparent;
+        border-color: transparent rgba(156, 204, 101, 0.47843137254901963) transparent transparent;
         position: absolute;
         right: 0;
         margin-right: 3.55rem;
