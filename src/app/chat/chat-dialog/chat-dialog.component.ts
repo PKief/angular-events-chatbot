@@ -4,7 +4,7 @@ import { ChatService } from '../chat.service';
 @Component({
   selector: 'app-chat-dialog',
   templateUrl: './chat-dialog.component.html',
-  styleUrls: ['./chat-dialog.component.sass']
+  styleUrls: ['./chat-dialog.component.scss']
 })
 export class ChatDialogComponent implements OnInit {
 

@@ -17,10 +17,9 @@ export class ChatService {
   }
 
   getResponse(query: string) {
-    console.log(this.token);
     const data = {
       'lang': 'de',
-      'query': 'Was gibt es für Veranstaltungen?',
+      'query': query,
       'sessionId': '12345',
       'timezone': 'Europe/Madrid'
     };
