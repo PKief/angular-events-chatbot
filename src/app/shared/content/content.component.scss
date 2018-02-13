@@ -11,6 +11,7 @@
 
   .content-block {
     margin-top: -2rem;
+    overflow: auto;
     background-color: mat-color($background, card);
     @include mat-elevation(2);
 

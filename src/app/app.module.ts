@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { ChatModule } from './chat/chat.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
+import { AboutModule } from './about/about.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,8 @@ import { CoreModule } from './core/core.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
+    SharedModule,
+    AboutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

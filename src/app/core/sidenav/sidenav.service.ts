@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSidenav } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class SidenavService {
@@ -41,5 +42,12 @@ export class SidenavService {
    */
   public toggle(isOpen?: boolean): Promise<void> {
     return this.sidenav.toggle(isOpen);
+  }
+
+  constructor(private router: Router) {
+    // close sidenav when the user navigates
+    router.events.subscribe((val) => {
+        this.close();
+    });
   }
 }

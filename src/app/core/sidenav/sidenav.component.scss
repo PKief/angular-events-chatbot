@@ -20,7 +20,7 @@
       background: mat-color($primary, darker);
       color: mat-color($primary, default-contrast);
       position: relative;
-      height: 5rem;
+      height: 3.6rem;
 
       h2 {
           padding: 0;
@@ -28,7 +28,11 @@
           text-align: left;
           padding: 1rem;
           font-family: sans-serif;
-          line-height: 2.8rem;
+          line-height: 1.5rem;
+          font-size: 1.2rem;
+          color: white;
+          font-weight: 200;
+          font-variant: small-caps;
       }
   }
 
