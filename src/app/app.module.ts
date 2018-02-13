@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import { ChatModule } from './chat/chat.module';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
+    ChatModule,
     BrowserModule,
     AppRoutingModule
   ],
