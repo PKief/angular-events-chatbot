@@ -12,6 +12,10 @@
       width: 16rem;
   }
 
+  .mat-drawer-content {
+    background: mat-color($primary);
+  }
+
   .sidenav-header {
       background: mat-color($primary, darker);
       color: mat-color($primary, default-contrast);

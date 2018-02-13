@@ -4,12 +4,12 @@ import { SidenavService } from './sidenav/sidenav.service';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { ThemingService } from './theming.service';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { MaterialModule } from '../shared/material.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    MaterialModule,
+    SharedModule,
   ],
   declarations: [
     SidenavComponent,

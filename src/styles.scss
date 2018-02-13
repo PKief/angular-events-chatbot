@@ -9,10 +9,12 @@
 
 @import 'app/chat/chat-dialog/chat-dialog.component';
 @import 'app/core/sidenav/sidenav.component';
+@import 'app/shared/content/content.component';
 
 @mixin custom-components-theme($theme) {
     @include chat-dialog-theme($theme);
     @include sidenav-theme($theme);
+    @include content-theme($theme);
 }
 
 @include angular-material-theme($app-theme);
