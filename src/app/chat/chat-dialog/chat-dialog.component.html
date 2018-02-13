@@ -1,4 +1,34 @@
 <div class="chat-window">
-  mein chat
-  <button (click)="sendMessage()">Senden</button>
+  <div class="chat-message-list">
+    <ul>
+      <li class="chat-message left">
+        <div class="chat-message-image">
+          <i class="material-icons">help_outline</i>
+        </div>
+        <div class="chat-message-content">
+          <div class="chat-message-author">Chatbot</div>
+          Wie kann ich dir helfen?
+        </div>
+      </li>
+      <li class="chat-message right">
+        <div class="chat-message-image">
+          <i class="material-icons">face</i>
+        </div>
+        <div class="chat-message-content">
+          <div class="chat-message-author">Ich</div>
+          Hi
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="bottom-bar">
+    <mat-form-field>
+      <textarea matInput placeholder="Frag mich etwas..." matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+    </mat-form-field>
+    <div class="message-send-button">
+      <button mat-fab (click)="sendMessage()">
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+  </div>
 </div>

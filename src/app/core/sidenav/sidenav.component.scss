@@ -16,6 +16,10 @@
     background: mat-color($primary);
   }
 
+  .mat-drawer-container {
+    height: 100vh;
+  }
+
   .sidenav-header {
       background: mat-color($primary, darker);
       color: mat-color($primary, default-contrast);

@@ -6,7 +6,9 @@ import {
   MatSidenavModule,
   MatToolbarModule,
   MatIconModule,
-  MatMenuModule
+  MatMenuModule,
+  MatFormFieldModule,
+  MatInputModule
 } from '@angular/material';
 
 import { ContentComponent } from './content/content.component';
@@ -19,6 +21,8 @@ const modules = [
   MatIconModule,
   MatMenuModule,
   FlexLayoutModule,
+  MatFormFieldModule,
+  MatInputModule,
 ];
 
 @NgModule({
