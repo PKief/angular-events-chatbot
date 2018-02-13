@@ -1,1 +1,40 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+@include mat-core();
+
+@import 'themes/default-theme.scss';
+@import 'themes/light-theme.scss';
+@import 'themes/black-theme.scss';
+
+@import 'app/chat/chat-dialog/chat-dialog.component';
+@import 'app/core/sidenav/sidenav.component';
+
+@mixin custom-components-theme($theme) {
+    @include chat-dialog-theme($theme);
+    @include sidenav-theme($theme);
+}
+
+@include angular-material-theme($app-theme);
+@include custom-components-theme($app-theme);
+
+.default-theme {
+  @include angular-material-theme($app-theme);
+  @include custom-components-theme($app-theme);
+}
+
+.light-theme {
+  @include angular-material-theme($app-light-theme);
+  @include custom-components-theme($app-light-theme);
+}
+
+.black-theme {
+  @include angular-material-theme($app-black-theme);
+  @include custom-components-theme($app-black-theme);
+}
+
+// Default styles
+body {
+    margin: 0;
+    padding: 0;
+}

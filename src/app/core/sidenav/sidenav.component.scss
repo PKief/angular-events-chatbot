@@ -1,0 +1,55 @@
+@mixin sidenav-theme($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  mat-sidenav-container.mat-drawer-container.mat-sidenav-container.mat-drawer-transition {
+      height: 100vh;
+  }
+
+  mat-sidenav {
+      width: 16rem;
+  }
+
+  .sidenav-header {
+      background: mat-color($primary, darker);
+      color: mat-color($primary, default-contrast);
+      position: relative;
+      height: 5rem;
+
+      h2 {
+          padding: 0;
+          margin: 0;
+          text-align: left;
+          padding: 1rem;
+          font-family: sans-serif;
+          line-height: 2.8rem;
+      }
+  }
+
+  .sidenav-content{
+      ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+
+          li{
+              button.mat-button {
+                  height: 3rem;
+                  line-height: 2.8rem;
+                  text-align: left;
+                  width: 100%;
+                  font-size: 1rem;
+
+                  mat-icon.mat-icon.material-icons {
+                      float: left;
+                      line-height: 2.7rem;
+                      padding-right: 1rem;
+                      color: mat-color($foreground, text);
+                  }
+              }
+          }
+      }
+  }
+}
