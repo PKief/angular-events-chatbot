@@ -43,7 +43,7 @@ export class PlacesService {
       keyword: keyword,
     };
     // tslint:disable-next-line:max-line-length
-    return this.http.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=5000&type=restaurant&keyword=cruise&key=AIzaSyD58SIp-bmdg2tys7ilDI6e0uZIzmkTRoM`);
+    return this.http.get(`http://localhost:9001/places?location=-33.8670522,151.1957362&radius=5000&type=restaurant&keyword=cruise`);
     // this.client.placesNearby({
     //   language: 'en',
     //   location: [-33.865, 151.038],
