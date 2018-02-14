@@ -53,8 +53,12 @@
       .chat-message {
         width: 70%;
         position: relative;
-        margin-top: .25rem;
-        margin-bottom: .25rem;
+        margin-top: .5rem;
+        margin-bottom: .5rem;
+
+        &:last-child{
+          padding-bottom: 2rem;
+        }
       }
 
       .chat-message.left {
@@ -88,7 +92,7 @@
         line-height: 3.3rem;
         height: 2.5rem;
         color: white;
-        background: #AED581;
+        background: rgba(156, 204, 101, 0.47843137254901963);
         border-radius: 50%;
         text-align: center;
       }
@@ -102,7 +106,7 @@
       }
 
       .chat-message.left > .chat-message-content {
-        background: #EEEEEE;
+        background: rgba(224, 224, 224, 0.28);
       }
 
       .chat-message.left > .chat-message-content:before {
@@ -130,12 +134,15 @@
 
       .chat-message-content {
         padding: .7rem;
+        font-family: sans-serif;
+        line-height: 1.3rem;
+        font-size: .9rem;
       }
 
       .chat-message-author {
-        font-weight: 600;
-        font-size: small;
-        padding-bottom: .5rem;
+        font-size: .8rem;
+        padding-bottom: .3rem;
+        color: mat-color($foreground, text);
       }
 
       img {

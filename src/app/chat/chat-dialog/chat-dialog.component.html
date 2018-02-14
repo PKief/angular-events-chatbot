@@ -1,32 +1,24 @@
 <div class="chat-window">
-  <div class="chat-message-list">
+  <div class="chat-message-list" #scrollMe>
     <ul>
-      <li class="chat-message left">
+      <li class="chat-message" [ngClass]="{'left': message.bot, 'right': !message.bot}" *ngFor="let message of chatMessages | async">
         <div class="chat-message-image">
-          <i class="material-icons">help_outline</i>
+          <i class="material-icons">{{message.bot ? 'help_outline' : 'face'}}</i>
         </div>
         <div class="chat-message-content">
-          <div class="chat-message-author">Chatbot</div>
-          Wie kann ich dir helfen?
-        </div>
-      </li>
-      <li class="chat-message right">
-        <div class="chat-message-image">
-          <i class="material-icons">face</i>
-        </div>
-        <div class="chat-message-content">
-          <div class="chat-message-author">Ich</div>
-          Hi
+          <div class="chat-message-author">{{message.bot ? 'Chatbot' : 'Ich'}}</div>
+          {{message.text}}
         </div>
       </li>
     </ul>
   </div>
   <div class="bottom-bar">
     <mat-form-field>
-      <textarea matInput placeholder="Frag mich etwas..." matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+      <textarea matInput #chatInput (keyup.enter)="sendMessage(chatInput)" placeholder="Frag mich etwas..." matTextareaAutosize
+        matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
     </mat-form-field>
     <div class="message-send-button">
-      <button mat-fab (click)="sendMessage()">
+      <button mat-fab (click)="sendMessage(chatInput)">
         <mat-icon>send</mat-icon>
       </button>
     </div>
