@@ -15,12 +15,14 @@ export class ChatService {
     private readonly http: HttpClient,
     private readonly places: PlacesService,
   ) {
-    this.chatMessages = new BehaviorSubject([{
-      id: Math.random(),
-      text: 'Hi, was kann ich für dich tun?',
-      bot: true,
-      date: Date.now(),
-    }]);
+    this.chatMessages = new BehaviorSubject([]);
+  }
+
+  private get headers() {
+    return new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`,
+      'Content-Type': 'application/json',
+    });
   }
 
   addMessageToChat(message, isBot: boolean) {
@@ -30,13 +32,6 @@ export class ChatService {
       bot: isBot,
       date: Date.now(),
     }]);
-  }
-
-  private get headers() {
-    return new HttpHeaders({
-      'Authorization': `Bearer ${this.token}`,
-      'Content-Type': 'application/json',
-    });
   }
 
   getResponse(query: string) {

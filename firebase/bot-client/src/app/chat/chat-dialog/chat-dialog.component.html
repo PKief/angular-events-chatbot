@@ -1,7 +1,7 @@
 <div class="chat-window">
   <div class="chat-message-list" #scrollMe>
     <ul>
-      <li class="chat-message" [ngClass]="{'left': message.bot, 'right': !message.bot}" *ngFor="let message of chatMessages | async">
+      <li class="chat-message" [ngClass]="{'left': message.bot, 'right': !message.bot}" *ngFor="let message of chatMessages | async" [@fadeIn]>
         <div class="chat-message-image">
           <i class="material-icons">{{message.bot ? 'help_outline' : 'face'}}</i>
         </div>

@@ -16,9 +16,9 @@ export class PlacesService {
       Promise: Promise
     });
 
-    this.getLocations('test').subscribe(result => {
-      console.log(result);
-    });
+    // this.getLocations('test').subscribe(result => {
+    //   console.log(result);
+    // });
   }
 
   private getGeoLocation(): Promise<Coordinates> {
@@ -42,6 +42,7 @@ export class PlacesService {
       key: environment.google.eventsBot,
       keyword: keyword,
     };
+    // return Promise.resolve();
     // tslint:disable-next-line:max-line-length
     return this.http.get(`https://us-central1-events-chatbot.cloudfunctions.net/api/places?location=-33.8670522,151.1957362&radius=5000&type=restaurant&keyword=cruise`);
     // this.client.placesNearby({
