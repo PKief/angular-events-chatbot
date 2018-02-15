@@ -1,0 +1,49 @@
+@import '~@angular/material/theming';
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+@include mat-core();
+
+@import 'themes/default-theme.scss';
+@import 'themes/light-theme.scss';
+@import 'themes/black-theme.scss';
+
+@import 'app/chat/chat-dialog/chat-dialog.component';
+@import 'app/about/about.component';
+@import 'app/core/sidenav/sidenav.component';
+@import 'app/shared/content/content.component';
+
+@mixin custom-components-theme($theme) {
+    @include chat-dialog-theme($theme);
+    @include sidenav-theme($theme);
+    @include content-theme($theme);
+    @include about-theme($theme);
+}
+
+@include angular-material-theme($app-theme);
+@include custom-components-theme($app-theme);
+
+.default-theme {
+  @include angular-material-theme($app-theme);
+  @include custom-components-theme($app-theme);
+}
+
+.light-theme {
+  @include angular-material-theme($app-light-theme);
+  @include custom-components-theme($app-light-theme);
+}
+
+.black-theme {
+  @include angular-material-theme($app-black-theme);
+  @include custom-components-theme($app-black-theme);
+}
+
+// Default styles
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: 200;
+}

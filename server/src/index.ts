@@ -1,5 +1,4 @@
 import * as express from 'express';
-import * as path from 'path';
 import * as googleMaps from '@google/maps';
 import * as https from 'https';
 import * as cors from 'cors';

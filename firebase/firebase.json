@@ -1,0 +1,30 @@
+{
+  "hosting": {
+    "public": "bot-client/dist",
+    "rewrites": [
+      {
+        "source": "/timestamp",
+        "function": "app"
+      },
+      {
+        "source": "/places",
+        "function": "app"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  },
+  "functions": {
+    "predeploy": [
+      "npm --prefix %RESOURCE_DIR% run lint",
+      "npm --prefix %RESOURCE_DIR% run build"
+    ]
+  }
+}

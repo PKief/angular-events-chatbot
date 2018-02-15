@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="toggleSidenav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <!-- <span>Event Bot</span> -->
+  <span class="fill-remaining-space"></span>
+
+  <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="Change theme">
+    <mat-icon>format_color_fill</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="changeTheme('default-theme')">Default</button>
+    <button mat-menu-item (click)="changeTheme('black-theme')">Dark</button>
+    <button mat-menu-item (click)="changeTheme('light-theme')">Light</button>
+  </mat-menu>
+</mat-toolbar>
