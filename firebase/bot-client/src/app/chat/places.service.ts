@@ -15,10 +15,6 @@ export class PlacesService {
       key: environment.google.eventsBot,
       Promise: Promise
     });
-
-    // this.getLocations('test').subscribe(result => {
-    //   console.log(result);
-    // });
   }
 
   private getGeoLocation(): Promise<Coordinates> {
@@ -33,31 +29,9 @@ export class PlacesService {
     });
   }
 
-  getLocations(keyword: string) {
-    const data = {
-      // location: `${coord.latitude},${coord.longitude}`,
-      location: '-33.8670522,151.1957362',
-      radius: 500,
-      type: 'restaurant',
-      key: environment.google.eventsBot,
-      keyword: keyword,
-    };
-    // return Promise.resolve();
+  getLocations(config: LocationConfig) {
     // tslint:disable-next-line:max-line-length
-    return this.http.get(`https://us-central1-events-chatbot.cloudfunctions.net/api/places?location=-33.8670522,151.1957362&radius=5000&type=restaurant&keyword=cruise`);
-    // this.client.placesNearby({
-    //   language: 'en',
-    //   location: [-33.865, 151.038],
-    //   rankby: 'distance',
-    //   minprice: 1,
-    //   maxprice: 4,
-    //   opennow: true,
-    //   type: 'restaurant'
-    // })
-    //   .asPromise()
-    //   .then(function (response) {
-    //     console.log(response);
-    //   });
+    return this.http.get(`https://us-central1-events-chatbot.cloudfunctions.net/api/places?location=${config.location}&radius=${config.radius || 500}&type=${config.type}&keyword=${config.keyword || ''}`);
   }
 
   private get headers() {
@@ -65,5 +39,11 @@ export class PlacesService {
       'Content-Type': 'application/json',
     });
   }
+}
 
+interface LocationConfig {
+  type: string;
+  location: string;
+  keyword?: string;
+  radius?: number;
 }

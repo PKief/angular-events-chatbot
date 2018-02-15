@@ -1,7 +1,8 @@
 <div class="chat-window">
   <div class="chat-message-list" #scrollMe>
     <ul>
-      <li class="chat-message" [ngClass]="{'left': message.bot, 'right': !message.bot}" *ngFor="let message of chatMessages | async" [@fadeIn]>
+      <li class="chat-message" [ngClass]="{'left': message.bot, 'right': !message.bot}" *ngFor="let message of chatMessages | async"
+        [@fadeIn]>
         <div class="chat-message-image">
           <i class="material-icons">{{message.bot ? 'help_outline' : 'face'}}</i>
         </div>
@@ -13,12 +14,19 @@
     </ul>
   </div>
   <div class="bottom-bar">
+    <!-- <div class="action-buttons">
+      <ul>
+        <li class="action-button" *ngFor="let btn of actionButtons">
+          <button mat-button (click)="btn.action()">{{btn.text}}</button>
+        </li>
+      </ul>
+    </div> -->
     <mat-form-field>
-      <textarea matInput #chatInput (keyup.enter)="sendMessage(chatInput)" placeholder="Frag mich etwas..." matTextareaAutosize
+      <textarea matInput #chatInput (keyup.enter)="chatInputController(chatInput)" placeholder="Frag mich etwas..." matTextareaAutosize
         matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
     </mat-form-field>
     <div class="message-send-button">
-      <button mat-fab (click)="sendMessage(chatInput)">
+      <button mat-fab (click)="chatInputController(chatInput)">
         <mat-icon>send</mat-icon>
       </button>
     </div>

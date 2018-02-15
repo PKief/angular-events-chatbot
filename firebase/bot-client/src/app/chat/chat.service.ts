@@ -43,4 +43,13 @@ export class ChatService {
     };
     return this.http.post(`${this.baseURL}`, data, { headers: this.headers });
   }
+
+  // showLocations() {
+  //   this.places.getLocations({
+  //     type: 'restaurant',
+  //     location: '-33.8670522,151.1957362',
+  //   }).subscribe(result => {
+  //     console.log(result);
+  //   });
+  // }
 }

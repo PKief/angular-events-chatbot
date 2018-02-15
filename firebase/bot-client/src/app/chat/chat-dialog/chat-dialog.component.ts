@@ -13,46 +13,67 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
   constructor(private chatService: ChatService) { }
 
   chatMessages;
+  actionButtons: any[];
 
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
   ngOnInit() {
-    this.scrollToBottom();
+    this.scrollTo();
     this.chatMessages = this.chatService.chatMessages;
     this.initial();
   }
 
   ngAfterViewChecked() {
-    this.scrollToBottom();
+    this.scrollTo();
   }
 
-  scrollToBottom(): void {
+  /**
+   * Always scroll chat window to the  to see latest chat messages.
+   */
+  scrollTo(): void {
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
     } catch (err) { }
   }
 
+  /**
+   * Initial chat message that comes from the bot.
+   */
   private initial() {
     this.chatService.getResponse('Hallo').subscribe((r: any) => {
       this.chatService.addMessageToChat(r.result.fulfillment.speech, true);
+      this.setActionButtons([
+        { action: () => this.sendMessage('Ja'), text: 'Ja', value: 'yes' },
+        { action: () => this.sendMessage('Nein'), text: 'Nein', value: 'no' },
+      ]);
     });
   }
 
-  sendMessage(input: HTMLInputElement) {
-    this.chatService.addMessageToChat(input.value, false);
-    this.chatService.getResponse(input.value).subscribe((r: any) => {
+  sendMessage(input: string) {
+    this.chatService.addMessageToChat(input, false);
+    this.chatService.getResponse(input).subscribe((r: any) => {
       console.log(r);
 
       r.result.fulfillment.messages.forEach(message => {
         this.chatService.addMessageToChat(message.speech, true);
       });
     });
+  }
+
+  /**
+   * Controller for the chat input element. Adds a chat message to the chat log-
+   * @param input The input element of the chat window or a text string.
+   */
+  chatInputController(input: HTMLInputElement) {
+    this.sendMessage(input.value);
     input.value = '';
   }
-}
 
-function delay(ms) {
-  return new Promise(function (resolve, reject) {
-    setTimeout(resolve, ms);
-  });
+  /**
+   * Set the action buttons.
+   * @param buttons Array with the action buttons to be shown as possible answers for the user.
+   */
+  setActionButtons(buttons: any[]) {
+    this.actionButtons = buttons;
+  }
 }
