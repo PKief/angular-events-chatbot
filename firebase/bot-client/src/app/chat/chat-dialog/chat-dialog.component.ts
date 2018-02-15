@@ -52,11 +52,12 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
   sendMessage(input: string) {
     this.chatService.addMessageToChat(input, false);
     this.chatService.getResponse(input).subscribe((r: any) => {
-      console.log(r);
 
       r.result.fulfillment.messages.forEach(message => {
         this.chatService.addMessageToChat(message.speech, true);
       });
+
+      this.chatService.checkAction(r.result.action, r.result.parameters);
     });
   }
 

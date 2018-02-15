@@ -18,6 +18,9 @@ export class ChatService {
     this.chatMessages = new BehaviorSubject([]);
   }
 
+  /**
+   * Headers for http requests
+   */
   private get headers() {
     return new HttpHeaders({
       'Authorization': `Bearer ${this.token}`,
@@ -25,7 +28,12 @@ export class ChatService {
     });
   }
 
-  addMessageToChat(message, isBot: boolean) {
+  /**
+   * Add a new message to the chat log
+   * @param message Message text
+   * @param isBot Is the message from the bot?
+   */
+  addMessageToChat(message: string, isBot: boolean) {
     this.chatMessages.next([...this.chatMessages.value, {
       id: Math.random(),
       text: message,
@@ -34,6 +42,10 @@ export class ChatService {
     }]);
   }
 
+  /**
+   * Send a message to dialog flow
+   * @param query Message that will be parsed by dialogflow
+   */
   getResponse(query: string) {
     const data = {
       lang: 'de',
@@ -44,12 +56,30 @@ export class ChatService {
     return this.http.post(`${this.baseURL}`, data, { headers: this.headers });
   }
 
-  // showLocations() {
-  //   this.places.getLocations({
-  //     type: 'restaurant',
-  //     location: '-33.8670522,151.1957362',
-  //   }).subscribe(result => {
-  //     console.log(result);
-  //   });
-  // }
+  /**
+   * Check the action type which comes back from dialog flow
+   * @param actionType Type of the action
+   */
+  checkAction(actionType: string, params: any) {
+    // console.log(actionType, params);
+    switch (actionType) {
+      case 'search.places': {
+        this.places.getCoordinates(params.Location).subscribe((result: any) => {
+          if (result.results.length > 0) {
+            const location = `${result.results[0].geometry.location.lat},${result.results[0].geometry.location.lng}`;
+            this.places.getLocations({
+              location,
+              type: params.EventType,
+            }).subscribe(res => {
+              console.log(res);
+            });
+          }
+        });
+        break;
+      }
+
+      default:
+        break;
+    }
+  }
 }

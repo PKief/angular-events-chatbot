@@ -3,11 +3,11 @@
     "public": "bot-client/dist",
     "rewrites": [
       {
-        "source": "/timestamp",
+        "source": "/places",
         "function": "app"
       },
       {
-        "source": "/places",
+        "source": "/geocode",
         "function": "app"
       },
       {

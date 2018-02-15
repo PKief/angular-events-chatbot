@@ -7,7 +7,7 @@ declare var google: any;
 
 @Injectable()
 export class PlacesService {
-  private baseURL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
+  private baseURL = 'https://us-central1-events-chatbot.cloudfunctions.net/api';
   private client: any;
 
   constructor(private readonly http: HttpClient) {
@@ -31,7 +31,11 @@ export class PlacesService {
 
   getLocations(config: LocationConfig) {
     // tslint:disable-next-line:max-line-length
-    return this.http.get(`https://us-central1-events-chatbot.cloudfunctions.net/api/places?location=${config.location}&radius=${config.radius || 500}&type=${config.type}&keyword=${config.keyword || ''}`);
+    return this.http.get(`${this.baseURL}/places?location=${config.location}&radius=${config.radius || 5000}&type=${config.type}&keyword=${config.keyword || ''}`);
+  }
+
+  getCoordinates(location: string) {
+    return this.http.get(`${this.baseURL}/geocode?location=${location}`);
   }
 
   private get headers() {

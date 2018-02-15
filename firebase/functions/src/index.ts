@@ -30,4 +30,24 @@ app.get('/places', (request: any, response: any) => {
     });
 });
 
+app.get('/geocode', (request: any, response: any) => {
+    const query = {
+        location: request.query.location
+    }
+
+    https.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${query.location}&key=AIzaSyD58SIp-bmdg2tys7ilDI6e0uZIzmkTRoM`, (res) => {
+        res.setEncoding("utf8");
+        let body = "";
+        res.on("data", data => {
+            body += data;
+        });
+        res.on("end", () => {
+            body = JSON.parse(body);
+            response.send(body);
+        });
+    }).on('error', (e) => {
+        console.error(e);
+    });
+});
+
 export const api = functions.https.onRequest(app);
