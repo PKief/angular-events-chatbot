@@ -41,12 +41,13 @@ export class ChatService {
    * @param message Message text
    * @param isBot Is the message from the bot?
    */
-  addMessageToChat(message: string, isBot: boolean, locationsList = []) {
+  addMessageToChat(options: MessageOptions) {
     this.chatMessages.next([...this.chatMessages.value, {
       id: Math.random(),
-      text: message,
-      locationsList,
-      bot: isBot,
+      text: options.text,
+      locationsList: options.locationsList,
+      selectList: options.selectList,
+      bot: options.bot,
       date: Date.now(),
     }]);
   }
@@ -74,6 +75,7 @@ export class ChatService {
    */
   checkAction(actionType: string, params: any) {
     switch (actionType) {
+      // search locations
       case 'search.places': {
         if (params.Location.length === 0) {
           break;
@@ -92,7 +94,11 @@ export class ChatService {
               this.locationsList = res.results;
               const locationsTrimmed = this.locationsList.length > this.listAmount ?
                 this.locationsList.slice(this.listStartIndex, this.listStartIndex + this.listAmount) : this.locationsList;
-              this.addMessageToChat('Das hier sind passende Orte:', true, locationsTrimmed);
+              this.addMessageToChat({
+                text: 'Das hier sind passende Orte:',
+                bot: true,
+                locationsList: locationsTrimmed
+              });
               this.listStartIndex += locationsTrimmed.length;
             });
           }
@@ -100,17 +106,22 @@ export class ChatService {
         break;
       }
 
+      // get more locations from the results array
       case 'search.places.more': {
-        console.log(this.listStartIndex, this.locationsList.length);
-        if (this.listStartIndex < this.locationsList.length) {
-          // tslint:disable-next-line:max-line-length
-          const amount = this.listStartIndex + this.listAmount < this.locationsList.length ? 5 : this.locationsList.length - this.listStartIndex;
-          // tslint:disable-next-line:max-line-length
-          console.log(`${this.listStartIndex} + ${this.listAmount} < ${this.locationsList.length} ? 5 : ${this.locationsList.length} - ${this.listStartIndex} = ${amount}`);
-          this.addMessageToChat('Hier sind weitere:', true, this.locationsList.slice(this.listStartIndex, this.listStartIndex + amount));
+        if (this.locationsList && this.listStartIndex < this.locationsList.length) {
+          const amount = this.listStartIndex + this.listAmount < this.locationsList.length ? 5
+            : this.locationsList.length - this.listStartIndex;
+          this.addMessageToChat({
+            text: 'Hier sind weitere:',
+            bot: true,
+            locationsList: this.locationsList.slice(this.listStartIndex, this.listStartIndex + amount)
+          });
           this.listStartIndex += amount;
         } else {
-          this.addMessageToChat('Ich konnte leider keine weiteren Orte finden.', true);
+          this.addMessageToChat({
+            text: 'Ich konnte leider keine weiteren Orte finden.',
+            bot: true
+          });
         }
 
         break;
@@ -120,4 +131,11 @@ export class ChatService {
         break;
     }
   }
+}
+
+interface MessageOptions {
+  text: string;
+  selectList?: any[];
+  locationsList?: Location[];
+  bot: boolean;
 }

@@ -45,7 +45,7 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
    */
   private initial() {
     this.chatService.getResponse('Hallo').subscribe((r: any) => {
-      this.chatService.addMessageToChat(r.result.fulfillment.speech, true);
+      this.chatService.addMessageToChat({ text: r.result.fulfillment.speech, bot: true });
       this.setActionButtons([
         { action: () => this.sendMessage('Ja'), text: 'Ja', value: 'yes' },
         { action: () => this.sendMessage('Nein'), text: 'Nein', value: 'no' },
@@ -58,11 +58,17 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
    * @param input Message text
    */
   sendMessage(input: string) {
-    this.chatService.addMessageToChat(input, false);
+    this.chatService.addMessageToChat({ text: input, bot: false });
     this.chatService.getResponse(input).subscribe((r: any) => {
-
+      console.log(r);
       r.result.fulfillment.messages.forEach(message => {
-        this.chatService.addMessageToChat(message.speech, true);
+        if (message.speech) {
+          this.chatService.addMessageToChat({ text: message.speech, bot: true });
+        }
+        if (message.payload) {
+          const list = message.payload.response.types;
+          this.chatService.addMessageToChat({ text: message.speech, bot: true, selectList: list });
+        }
       });
       this.chatService.checkAction(r.result.action, r.result.parameters);
     });

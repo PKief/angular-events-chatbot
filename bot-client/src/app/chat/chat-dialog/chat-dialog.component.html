@@ -9,7 +9,15 @@
         <div class="chat-message-content">
           <div class="chat-message-author">{{message.bot ? 'Chatbot' : 'Ich'}}</div>
           {{message.text}}
-          <ul class="chat-message-location-list" *ngIf="message.locationsList.length > 0">
+          <ul class="chat-message-location-list" *ngIf="message.selectList?.length > 0">
+            <li *ngFor="let select of message.selectList" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+              <div fxFlex="60">{{select}}</div>
+              <div fxFlex="40">
+                <button mat-button (click)="sendMessage(select)">Wählen</button>
+              </div>
+            </li>
+          </ul>
+          <ul class="chat-message-location-list" *ngIf="message.locationsList?.length > 0">
             <li *ngFor="let location of message.locationsList" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
               <img [src]="location.icon" class="location-icon" alt="icon" fxFlex="7" />
               <div class="container" fxLayout="column" fxLayoutAlign="start start" fxFlex="93">
