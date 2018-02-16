@@ -28,8 +28,10 @@
                   </mat-icon>
                 </div>
               </div>
+              <button mat-button (click)="showLocationDetails(location)">Wählen</button>
             </li>
           </ul>
+          <app-location-detail *ngIf="message.locationDetail" [location]="message.locationDetail"></app-location-detail>
         </div>
       </li>
       <li class="chat-message left" [@fadeIn] *ngIf="isLoading | async">

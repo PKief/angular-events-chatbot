@@ -13,7 +13,7 @@
     margin-top: -2rem;
     overflow: auto;
     background-color: mat-color($background, card);
-    @include mat-elevation(2);
+    @include mat-elevation(4);
 
     &.small-layout{
       margin-top: 0;

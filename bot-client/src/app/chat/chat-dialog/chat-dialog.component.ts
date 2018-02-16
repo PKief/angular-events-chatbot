@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@ang
 import { ChatService } from '../chat.service';
 import { fadeIn } from '../../shared/animations/fadeIn';
 import { Subject } from 'rxjs/Subject';
+import { Location } from '../../models';
 
 @Component({
   selector: 'app-chat-dialog',
@@ -109,5 +110,9 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
     stars.push(...Array(amountHalfStars).fill(0));
     stars.push(...Array(amountEmptyStars).fill(-1));
     return stars;
+  }
+
+  showLocationDetails(location: Location) {
+    this.chatService.showLocationDetails(location);
   }
 }

@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
 import { ChatRoutingModule } from './chat-routing.module';
 import { PlacesService } from './places.service';
+import { LocationDetailComponent } from './chat-dialog/location-detail/location-detail.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { PlacesService } from './places.service';
     SharedModule,
     ChatRoutingModule,
   ],
-  declarations: [ChatDialogComponent],
+  declarations: [ChatDialogComponent, LocationDetailComponent],
   providers: [ChatService, PlacesService],
   exports: [ChatDialogComponent]
 })

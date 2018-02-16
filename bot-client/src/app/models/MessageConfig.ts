@@ -1,8 +1,9 @@
 import { Location } from './Location';
 
 export interface MessageConfig {
-  text: string;
+  text?: string;
   selectList?: any[];
   locationsList?: Location[];
+  locationDetail?: Location;
   bot: boolean;
 }

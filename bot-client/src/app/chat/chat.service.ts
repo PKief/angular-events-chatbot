@@ -14,6 +14,7 @@ export class ChatService {
   chatMessages: BehaviorSubject<any[]>;
   possibleAnswers: BehaviorSubject<string[]>;
   locationsList: Location[];
+  currentLocation: Location;
   private listStartIndex = 0;
   private listAmount = 4;
 
@@ -50,6 +51,7 @@ export class ChatService {
       locationsList: options.locationsList,
       selectList: options.selectList,
       bot: options.bot,
+      locationDetail: options.locationDetail,
       date: Date.now(),
     }]);
   }
@@ -113,6 +115,7 @@ export class ChatService {
           this.listStartIndex = 0;
           this.listAmount = 5;
           this.locationsList = res.results;
+          console.log(res.results);
           const locationsTrimmed = this.locationsList.length > this.listAmount ?
             this.locationsList.slice(this.listStartIndex, this.listStartIndex + this.listAmount) : this.locationsList;
           this.addMessageToChat({
@@ -152,5 +155,22 @@ export class ChatService {
       });
       this.possibleAnswers.next(['Danke', 'Etwas anderes machen']);
     }
+  }
+
+  /**
+   * Show the user further details about a location.
+   * @param location location object
+   */
+  showLocationDetails(location: Location) {
+    this.isLoading.next(true);
+    this.places.getLocationDetail(location.place_id).subscribe((result: any) => {
+      this.isLoading.next(false);
+      console.log(result);
+      this.currentLocation = result;
+      this.addMessageToChat({
+        bot: true,
+        locationDetail: location,
+      });
+    });
   }
 }

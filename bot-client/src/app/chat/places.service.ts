@@ -29,8 +29,17 @@ export class PlacesService {
     return this.http.get(`${this.baseURL}/places?location=${config.location}&radius=${config.radius || 5000}&type=${config.type}&keyword=${config.keyword || ''}`);
   }
 
+  getLocationDetail(placeId: string) {
+    return this.http.get(`${this.baseURL}/places/details?placeid=${placeId}`);
+  }
+
   getCoordinates(location: string) {
     return this.http.get(`${this.baseURL}/geocode?location=${location}`);
+  }
+
+  getPhoto(photoreference: string, maxheight: number, maxWidth: number) {
+    // tslint:disable-next-line:max-line-length
+    return this.http.get(`${this.baseURL}/places/photo?photoreference=${photoreference}&sensor=false&maxheight=${maxheight}&maxwidth=${maxWidth}`);
   }
 
   private get headers() {
