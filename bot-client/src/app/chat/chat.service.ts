@@ -7,9 +7,10 @@ import { PlacesService } from './places.service';
 @Injectable()
 export class ChatService {
   private readonly token = environment.dialogflow.eventsBot;
-  private baseURL = 'https://api.dialogflow.com/v1/query?v=20150910';
+  private readonly baseURL = 'https://api.dialogflow.com/v1/query?v=20150910';
 
   chatMessages: BehaviorSubject<any[]>;
+  currentResults: any[];
 
   constructor(
     private readonly http: HttpClient,
@@ -33,10 +34,11 @@ export class ChatService {
    * @param message Message text
    * @param isBot Is the message from the bot?
    */
-  addMessageToChat(message: string, isBot: boolean) {
+  addMessageToChat(message: string, isBot: boolean, locationsList = []) {
     this.chatMessages.next([...this.chatMessages.value, {
       id: Math.random(),
       text: message,
+      locationsList,
       bot: isBot,
       date: Date.now(),
     }]);
@@ -70,8 +72,10 @@ export class ChatService {
             this.places.getLocations({
               location,
               type: params.EventType,
-            }).subscribe(res => {
+            }).subscribe((res: any) => {
               console.log(res);
+              this.currentResults = res.results;
+              this.addMessageToChat('Das hier sind passende Orte:', true, res.results);
             });
           }
         });

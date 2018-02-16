@@ -9,6 +9,19 @@
         <div class="chat-message-content">
           <div class="chat-message-author">{{message.bot ? 'Chatbot' : 'Ich'}}</div>
           {{message.text}}
+          <ul class="chat-message-location-list" *ngIf="message.locationsList.length > 0">
+            <li *ngFor="let location of (message.locationsList ? message.locationsList.slice(0,5): [])" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+              <img [src]="location.icon" class="location-icon" alt="icon" fxFlex="7" />
+              <div class="container" fxLayout="column" fxLayoutAlign="start start" fxFlex="93">
+                <div class="location-name">{{location.name}}</div>
+                <div class="location-rating">
+                  <mat-icon *ngFor="let star of getRatingStars(location.rating)">
+                    {{star === 1 ? 'star' : star === 0 ? 'star_half' : 'star_border'}}
+                  </mat-icon>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
       </li>
     </ul>
