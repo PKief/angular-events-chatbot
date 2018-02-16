@@ -143,12 +143,14 @@ export class ChatService {
         bot: true,
         locationsList: this.locationsList.slice(this.listStartIndex, this.listStartIndex + amount)
       });
+      this.possibleAnswers.next(['Weitere anzeigen', 'Vielen Dank']);
       this.listStartIndex += amount;
     } else {
       this.addMessageToChat({
         text: 'Ich konnte leider keine weiteren Orte finden.',
         bot: true
       });
+      this.possibleAnswers.next(['Danke', 'Etwas anderes machen']);
     }
   }
 }
