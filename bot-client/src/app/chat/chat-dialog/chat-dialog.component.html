@@ -53,7 +53,7 @@
         <button mat-button (click)="sendMessage(answer)">{{answer}}</button>
       </li>
     </ul>
-    <mat-form-field floatPlaceholder="never">
+    <mat-form-field floatPlaceholder="never" color="accent">
       <textarea matInput #chatInput (keyup.enter)="chatInputController(chatInput)" placeholder="Frag mich etwas..." matTextareaAutosize
         matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
     </mat-form-field>
