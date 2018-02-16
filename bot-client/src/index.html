@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>EventsChatbot</title>
@@ -7,8 +8,70 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+
+    .loading-dot {
+      width: 10px;
+      height: 10px;
+      border: 2px solid gray;
+      border-radius: 50%;
+      float: left;
+      margin: 0 5px;
+      -webkit-transform: scale(0);
+      transform: scale(0);
+      -webkit-animation: fx 1000ms ease infinite 0ms;
+      animation: fx 1000ms ease infinite 0ms;
+    }
+
+    .loading-dot:nth-child(2) {
+      -webkit-animation: fx 1000ms ease infinite 300ms;
+      animation: fx 1000ms ease infinite 300ms;
+    }
+
+    .loading-dot:nth-child(3) {
+      -webkit-animation: fx 1000ms ease infinite 600ms;
+      animation: fx 1000ms ease infinite 600ms;
+    }
+
+    @-webkit-keyframes fx {
+      50% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes fx {
+      50% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <app-root></app-root>
+  <app-root>
+    <div class="container">
+      <div class="loading-dot"></div>
+      <div class="loading-dot"></div>
+      <div class="loading-dot"></div>
+    </div>
+  </app-root>
 </body>
+
 </html>

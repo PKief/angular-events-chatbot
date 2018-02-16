@@ -41,4 +41,13 @@
         line-height: 1.5rem;
     }
   }
+
+  .social-media-buttons {
+    margin-top: 1rem;
+
+    .mat-raised-button {
+      color: rgba(255, 255, 255, 1);
+      background-color: #1b95e0;
+    }
+  }
 }
