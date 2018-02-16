@@ -46,14 +46,12 @@
     </ul>
   </div>
   <div class="bottom-bar">
-    <!-- <div class="action-buttons">
-      <ul>
-        <li class="action-button" *ngFor="let btn of actionButtons">
-          <button mat-button (click)="btn.action()">{{btn.text}}</button>
-        </li>
-      </ul>
-    </div> -->
-    <mat-form-field>
+    <ul class="possibleAnswers">
+      <li *ngFor="let answer of (possibleAnswers | async)">
+        <button mat-button (click)="sendMessage(answer)">{{answer}}</button>
+      </li>
+    </ul>
+    <mat-form-field floatPlaceholder="never">
       <textarea matInput #chatInput (keyup.enter)="chatInputController(chatInput)" placeholder="Frag mich etwas..." matTextareaAutosize
         matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
     </mat-form-field>

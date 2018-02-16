@@ -14,7 +14,7 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
   constructor(private chatService: ChatService) { }
 
   chatMessages;
-  actionButtons: any[];
+  possibleAnswers: Subject<string[]>;
   isLoading: Subject<boolean>;
 
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
@@ -25,6 +25,7 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
     this.initial();
 
     this.isLoading = this.chatService.isLoading;
+    this.possibleAnswers = this.chatService.possibleAnswers;
   }
 
   ngAfterViewChecked() {
@@ -46,10 +47,7 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
   private initial() {
     this.chatService.getResponse('Hallo').subscribe((r: any) => {
       this.chatService.addMessageToChat({ text: r.result.fulfillment.speech, bot: true });
-      this.setActionButtons([
-        { action: () => this.sendMessage('Ja'), text: 'Ja', value: 'yes' },
-        { action: () => this.sendMessage('Nein'), text: 'Nein', value: 'no' },
-      ]);
+      this.chatService.possibleAnswers.next(['Ja', 'Nein', 'Wer bist du?']);
     });
   }
 
@@ -58,6 +56,7 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
    * @param input Message text
    */
   sendMessage(input: string) {
+    this.chatService.possibleAnswers.next([]);
     this.chatService.addMessageToChat({ text: input, bot: false });
     this.chatService.getResponse(input).subscribe((r: any) => {
       console.log(r);
@@ -66,8 +65,13 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
           this.chatService.addMessageToChat({ text: message.speech, bot: true });
         }
         if (message.payload) {
-          const list = message.payload.response.types;
-          this.chatService.addMessageToChat({ text: message.speech, bot: true, selectList: list });
+          if (message.payload.response.types) {
+            const list = message.payload.response.types;
+            this.chatService.addMessageToChat({ text: message.speech, bot: true, selectList: list });
+          }
+          if (message.payload.response.possibleAnswers) {
+            this.possibleAnswers.next(message.payload.response.possibleAnswers);
+          }
         }
       });
       this.chatService.checkAction(r.result.action, r.result.parameters);
@@ -81,14 +85,6 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
   chatInputController(input: HTMLInputElement) {
     this.sendMessage(input.value);
     input.value = '';
-  }
-
-  /**
-   * Set the action buttons.
-   * @param buttons Array with the action buttons to be shown as possible answers for the user.
-   */
-  setActionButtons(buttons: any[]) {
-    this.actionButtons = buttons;
   }
 
   /**

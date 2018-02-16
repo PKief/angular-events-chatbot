@@ -26,18 +26,21 @@
         margin: 1rem;
       }
 
-      .action-buttons {
-        ul {
-          list-style: none;
-          padding: 0;
-          margin: 0;
+      ul.possibleAnswers {
+        background: #b0bec540;
+        height: 2.5rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        overflow: auto;
+        white-space: nowrap;
 
-          li.action-button > button {
-            width: 100%;
-            height: 3rem;
-            background-color: mat-color($accent);
-            color: white;
-            border-radius: initial;
+        li {
+          display: inline-block;
+          height: 100%;
+
+          button {
+            height: 100%;
           }
         }
       }
@@ -46,7 +49,7 @@
     .chat-message-list {
       position: relative;
       overflow: auto;
-      height: calc(100% - 5.5rem);
+      height: calc(100% - 8rem);
 
       ul{
         list-style: none;

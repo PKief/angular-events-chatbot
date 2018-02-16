@@ -12,6 +12,7 @@ export class ChatService {
   private readonly baseURL = 'https://api.dialogflow.com/v1/query?v=20150910';
 
   chatMessages: BehaviorSubject<any[]>;
+  possibleAnswers: BehaviorSubject<string[]>;
   locationsList: Location[];
   private listStartIndex = 0;
   private listAmount = 4;
@@ -24,6 +25,7 @@ export class ChatService {
   ) {
     this.chatMessages = new BehaviorSubject([]);
     this.isLoading = new BehaviorSubject(true);
+    this.possibleAnswers = new BehaviorSubject([]);
   }
 
   /**
@@ -122,6 +124,7 @@ export class ChatService {
             text: 'Frage nach weiteren, wenn du noch mehr brauchst!',
             bot: true,
           });
+          this.possibleAnswers.next(['Zeige weitere', 'Vielen Dank']);
           this.listStartIndex += locationsTrimmed.length;
         });
       }
