@@ -11,12 +11,14 @@
 @import 'app/about/about.component';
 @import 'app/core/sidenav/sidenav.component';
 @import 'app/shared/content/content.component';
+@import 'app/shared/loading-spinner/loading-spinner.component';
 
 @mixin custom-components-theme($theme) {
     @include chat-dialog-theme($theme);
     @include sidenav-theme($theme);
     @include content-theme($theme);
     @include about-theme($theme);
+    @include loading-spinner-theme($theme);
 }
 
 @include angular-material-theme($app-theme);

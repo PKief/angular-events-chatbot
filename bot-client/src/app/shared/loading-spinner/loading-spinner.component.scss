@@ -1,0 +1,57 @@
+@mixin loading-spinner-theme($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .spinner-container {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    margin: .2rem 0 .8rem 0;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    padding-bottom: .2rem;
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border: 1px solid mat-color($primary);
+      border-radius: 50%;
+      float: left;
+      margin: 0 5px;
+      -webkit-transform: scale(0);
+              transform: scale(0);
+      -webkit-animation: fx 1000ms ease infinite 0ms;
+              animation: fx 1000ms ease infinite 0ms;
+    }
+    .dot:nth-child(2) {
+      -webkit-animation: fx 1000ms ease infinite 300ms;
+      animation: fx 1000ms ease infinite 300ms;
+    }
+    .dot:nth-child(3) {
+      -webkit-animation: fx 1000ms ease infinite 600ms;
+      animation: fx 1000ms ease infinite 600ms;
+    }
+    @-webkit-keyframes fx {
+      50% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+    @keyframes fx {
+      50% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+  }
+}

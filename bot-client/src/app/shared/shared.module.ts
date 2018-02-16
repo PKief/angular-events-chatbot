@@ -12,6 +12,7 @@ import {
 } from '@angular/material';
 
 import { ContentComponent } from './content/content.component';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 const modules = [
   MatButtonModule,
@@ -28,10 +29,13 @@ const modules = [
 @NgModule({
   imports: [...modules],
   exports: [
-    ...modules, ContentComponent
+    ...modules,
+    ContentComponent,
+    LoadingSpinnerComponent,
   ],
   declarations: [
-    ContentComponent
+    ContentComponent,
+    LoadingSpinnerComponent
   ],
 })
 export class SharedModule { }

@@ -10,7 +10,7 @@
           <div class="chat-message-author">{{message.bot ? 'Chatbot' : 'Ich'}}</div>
           {{message.text}}
           <ul class="chat-message-location-list" *ngIf="message.locationsList.length > 0">
-            <li *ngFor="let location of (message.locationsList ? message.locationsList.slice(0,5): [])" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+            <li *ngFor="let location of message.locationsList" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
               <img [src]="location.icon" class="location-icon" alt="icon" fxFlex="7" />
               <div class="container" fxLayout="column" fxLayoutAlign="start start" fxFlex="93">
                 <div class="location-name">{{location.name}}</div>
@@ -22,6 +22,17 @@
               </div>
             </li>
           </ul>
+        </div>
+      </li>
+      <li class="chat-message left" [@fadeIn] *ngIf="isLoading | async">
+        <div class="chat-message-image">
+          <i class="material-icons">help_outline</i>
+        </div>
+        <div class="chat-message-content">
+          <div class="chat-message-author">Chatbot</div>
+          <div>
+            <app-loading-spinner></app-loading-spinner>
+          </div>
         </div>
       </li>
     </ul>

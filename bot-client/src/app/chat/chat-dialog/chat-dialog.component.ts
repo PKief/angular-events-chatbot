@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { ChatService } from '../chat.service';
 import { fadeIn } from '../../shared/animations/fadeIn';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-chat-dialog',
@@ -14,6 +15,7 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
 
   chatMessages;
   actionButtons: any[];
+  isLoading: Subject<boolean>;
 
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
@@ -21,6 +23,8 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
     this.scrollTo();
     this.chatMessages = this.chatService.chatMessages;
     this.initial();
+
+    this.isLoading = this.chatService.isLoading;
   }
 
   ngAfterViewChecked() {
@@ -49,6 +53,10 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
     });
   }
 
+  /**
+   * Add a user message to the chat log and send the message to dialogflow.
+   * @param input Message text
+   */
   sendMessage(input: string) {
     this.chatService.addMessageToChat(input, false);
     this.chatService.getResponse(input).subscribe((r: any) => {
@@ -56,13 +64,12 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
       r.result.fulfillment.messages.forEach(message => {
         this.chatService.addMessageToChat(message.speech, true);
       });
-
       this.chatService.checkAction(r.result.action, r.result.parameters);
     });
   }
 
   /**
-   * Controller for the chat input element. Adds a chat message to the chat log-
+   * Controller for the chat input element. Adds a chat message to the chat log.
    * @param input The input element of the chat window or a text string.
    */
   chatInputController(input: HTMLInputElement) {
@@ -78,9 +85,13 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
     this.actionButtons = buttons;
   }
 
+  /**
+   * Get the amount of stars for the rating bar of a location.
+   * @param rating Rating as number
+   */
   getRatingStars(rating: number) {
     const stars = [];
-    const starsArray = rating.toString().split('.');
+    const starsArray = rating ? rating.toString().split('.') : [0, 0];
 
     const amountFullStars = Number(starsArray[0]);
     let amountHalfStars = 0;
@@ -95,7 +106,6 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
     stars.push(...Array(amountFullStars).fill(1));
     stars.push(...Array(amountHalfStars).fill(0));
     stars.push(...Array(amountEmptyStars).fill(-1));
-    console.log(stars);
     return stars;
   }
 }
