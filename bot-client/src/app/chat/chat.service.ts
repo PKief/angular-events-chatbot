@@ -99,6 +99,10 @@ export class ChatService {
                 bot: true,
                 locationsList: locationsTrimmed
               });
+              this.addMessageToChat({
+                text: 'Frage nach weiteren, wenn du noch mehr brauchst!',
+                bot: true,
+              });
               this.listStartIndex += locationsTrimmed.length;
             });
           }

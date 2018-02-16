@@ -52,6 +52,10 @@
         list-style: none;
         padding: 2rem;
         margin: 0;
+
+        @media only screen and (max-width: 500px) {
+          padding: .8rem;
+        }
       }
 
       .card-body {
