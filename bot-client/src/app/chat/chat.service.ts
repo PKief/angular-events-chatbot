@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { PlacesService } from './places.service';
-import { Location } from '../models';
+import { Location, MessageConfig } from '../models';
 import { map } from 'rxjs/operators/map';
 
 @Injectable()
@@ -41,7 +41,7 @@ export class ChatService {
    * @param message Message text
    * @param isBot Is the message from the bot?
    */
-  addMessageToChat(options: MessageOptions) {
+  addMessageToChat(options: MessageConfig) {
     this.chatMessages.next([...this.chatMessages.value, {
       id: Math.random(),
       text: options.text,
@@ -80,54 +80,13 @@ export class ChatService {
         if (params.Location.length === 0) {
           break;
         }
-        this.isLoading.next(true);
-        this.places.getCoordinates(params.Location).subscribe((result: any) => {
-          if (result.results.length > 0) {
-            const location = `${result.results[0].geometry.location.lat},${result.results[0].geometry.location.lng}`;
-            this.places.getLocations({
-              location,
-              type: params.EventType,
-            }).subscribe((res: any) => {
-              this.isLoading.next(false);
-              this.listStartIndex = 0;
-              this.listAmount = 5;
-              this.locationsList = res.results;
-              const locationsTrimmed = this.locationsList.length > this.listAmount ?
-                this.locationsList.slice(this.listStartIndex, this.listStartIndex + this.listAmount) : this.locationsList;
-              this.addMessageToChat({
-                text: 'Das hier sind passende Orte:',
-                bot: true,
-                locationsList: locationsTrimmed
-              });
-              this.addMessageToChat({
-                text: 'Frage nach weiteren, wenn du noch mehr brauchst!',
-                bot: true,
-              });
-              this.listStartIndex += locationsTrimmed.length;
-            });
-          }
-        });
+        this.getLocations(params);
         break;
       }
 
       // get more locations from the results array
       case 'search.places.more': {
-        if (this.locationsList && this.listStartIndex < this.locationsList.length) {
-          const amount = this.listStartIndex + this.listAmount < this.locationsList.length ? 5
-            : this.locationsList.length - this.listStartIndex;
-          this.addMessageToChat({
-            text: 'Hier sind weitere:',
-            bot: true,
-            locationsList: this.locationsList.slice(this.listStartIndex, this.listStartIndex + amount)
-          });
-          this.listStartIndex += amount;
-        } else {
-          this.addMessageToChat({
-            text: 'Ich konnte leider keine weiteren Orte finden.',
-            bot: true
-          });
-        }
-
+        this.getMoreLocations();
         break;
       }
 
@@ -135,11 +94,58 @@ export class ChatService {
         break;
     }
   }
-}
 
-interface MessageOptions {
-  text: string;
-  selectList?: any[];
-  locationsList?: Location[];
-  bot: boolean;
+  /**
+   * Get the locations by the given parameters.
+   */
+  private getLocations(params) {
+    this.isLoading.next(true);
+    this.places.getCoordinates(params.Location).subscribe((result: any) => {
+      if (result.results.length > 0) {
+        const location = `${result.results[0].geometry.location.lat},${result.results[0].geometry.location.lng}`;
+        this.places.getLocations({
+          location,
+          type: params.EventType,
+        }).subscribe((res: any) => {
+          this.isLoading.next(false);
+          this.listStartIndex = 0;
+          this.listAmount = 5;
+          this.locationsList = res.results;
+          const locationsTrimmed = this.locationsList.length > this.listAmount ?
+            this.locationsList.slice(this.listStartIndex, this.listStartIndex + this.listAmount) : this.locationsList;
+          this.addMessageToChat({
+            text: 'Das hier sind passende Orte:',
+            bot: true,
+            locationsList: locationsTrimmed
+          });
+          this.addMessageToChat({
+            text: 'Frage nach weiteren, wenn du noch mehr brauchst!',
+            bot: true,
+          });
+          this.listStartIndex += locationsTrimmed.length;
+        });
+      }
+    });
+  }
+
+  /**
+   * Show more results in the chat.
+   */
+  getMoreLocations() {
+    if (this.locationsList && this.listStartIndex < this.locationsList.length) {
+      const amount = this.listStartIndex + this.listAmount < this.locationsList.length ? 5
+        : this.locationsList.length - this.listStartIndex;
+      this.addMessageToChat({
+        text: 'Hier sind weitere:',
+        bot: true,
+        locationsList: this.locationsList.slice(this.listStartIndex, this.listStartIndex + amount)
+      });
+      this.listStartIndex += amount;
+    } else {
+      this.addMessageToChat({
+        text: 'Ich konnte leider keine weiteren Orte finden.',
+        bot: true
+      });
+    }
+  }
 }

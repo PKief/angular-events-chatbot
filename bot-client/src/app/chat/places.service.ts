@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from './../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import * as googleMaps from '@google/maps';
+import { LocationConfig } from '../models';
 
 declare var google: any;
 
@@ -10,12 +10,7 @@ export class PlacesService {
   private baseURL = 'https://us-central1-events-chatbot.cloudfunctions.net/api';
   private client: any;
 
-  constructor(private readonly http: HttpClient) {
-    this.client = googleMaps.createClient({
-      key: environment.google.eventsBot,
-      Promise: Promise
-    });
-  }
+  constructor(private readonly http: HttpClient) { }
 
   private getGeoLocation(): Promise<Coordinates> {
     return new Promise((resolve, reject) => {
@@ -43,11 +38,4 @@ export class PlacesService {
       'Content-Type': 'application/json',
     });
   }
-}
-
-interface LocationConfig {
-  type: string;
-  location: string;
-  keyword?: string;
-  radius?: number;
 }

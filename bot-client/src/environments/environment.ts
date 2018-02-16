@@ -8,8 +8,5 @@ export const environment = {
 
   dialogflow: {
     eventsBot: '2b9f1b0e56254f71971f06bb4db5986c'
-  },
-  google: {
-    eventsBot: 'AIzaSyD58SIp-bmdg2tys7ilDI6e0uZIzmkTRoM'
   }
 };
