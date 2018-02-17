@@ -56,7 +56,7 @@
         padding: 2rem;
         margin: 0;
 
-        @media only screen and (max-width: 500px) {
+        @media only screen and (max-width: 600px) {
           padding: .8rem;
         }
       }
@@ -173,7 +173,7 @@
         max-width: 100%;
       }
 
-      @media only screen and (max-width: 500px) {
+      @media only screen and (max-width: 600px) {
         .chat-message {
             width: 100%;
         }
@@ -188,7 +188,6 @@
       a {
         color: #1565C0;
       }
-
     }
   }
 }
