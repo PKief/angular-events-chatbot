@@ -11,6 +11,7 @@ import { LocationDetailComponent } from './chat-dialog/location-detail/location-
 import { LocationRatingComponent } from './chat-dialog/location-rating/location-rating.component';
 import { LocationsListComponent } from './chat-dialog/locations-list/locations-list.component';
 import { SelectionListComponent } from './chat-dialog/selection-list/selection-list.component';
+import { FavoritesService } from './favorites.service';
 
 @NgModule({
   imports: [
@@ -20,8 +21,18 @@ import { SelectionListComponent } from './chat-dialog/selection-list/selection-l
     SharedModule,
     ChatRoutingModule,
   ],
-  declarations: [ChatDialogComponent, LocationDetailComponent, LocationRatingComponent, LocationsListComponent, SelectionListComponent],
-  providers: [ChatService, PlacesService],
+  declarations: [
+    ChatDialogComponent,
+    LocationDetailComponent,
+    LocationRatingComponent,
+    LocationsListComponent,
+    SelectionListComponent
+  ],
+  providers: [
+    ChatService,
+    PlacesService,
+    FavoritesService
+  ],
   exports: [ChatDialogComponent]
 })
 export class ChatModule { }
