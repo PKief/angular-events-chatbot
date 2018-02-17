@@ -64,14 +64,6 @@ export class PlacesService {
       );
   }
 
-  getPhoto(photoreference: string, maxheight: number, maxWidth: number) {
-    // tslint:disable-next-line:max-line-length
-    return this.http.get(`${this.baseURL}/places/photo?photoreference=${photoreference}&sensor=false&maxheight=${maxheight}&maxwidth=${maxWidth}`)
-      .pipe(
-        catchError(this.handleError('getPhoto', []))
-      );
-  }
-
   private get headers() {
     return new HttpHeaders({
       'Content-Type': 'application/json',

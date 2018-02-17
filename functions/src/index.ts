@@ -31,37 +31,6 @@ app.get('/places', (request: any, response: any) => {
     });
 });
 
-app.get('/places/photo', (request: any, response: any) => {
-    const query = {
-        photoReference: request.query.photo_reference,
-        maxHeight: request.query.max_height,
-        maxWidth: request.query.max_width,
-    }
-
-    https.get(`https://maps.googleapis.com/maps/api/place/photo?photoreference=${query.photoReference}&sensor=false&maxheight=${query.maxHeight}&maxwidth=${query.maxWidth}&key=AIzaSyD58SIp-bmdg2tys7ilDI6e0uZIzmkTRoM`, (res) => {
-        // const data = new Stream();
-
-        // res.on('data', function (chunk) {
-        //     data.push(chunk);
-        // });
-
-        // res.on('end', function () {
-        //     response.send(data.read());
-        // });
-
-        res.setEncoding('base64');
-        let body = "data:" + res.headers["content-type"] + ";base64,";
-        res.on('data', (data) => { body += data });
-        res.on('end', () => {
-            console.log(body);
-            //return res.json({result: body, status: 'success'});
-            response.send(body);
-        });
-    }).on('error', (e) => {
-        console.error(e);
-    });
-});
-
 app.get('/places/details', (request: any, response: any) => {
     const query = {
         placeid: request.query.placeid
