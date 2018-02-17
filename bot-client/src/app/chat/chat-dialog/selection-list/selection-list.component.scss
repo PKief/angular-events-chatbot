@@ -1,0 +1,16 @@
+ul.chat-message-selection-list {
+  margin: 0;
+  margin-top: 1rem;
+  padding: 0;
+  list-style: none;
+
+  li {
+    img.location-icon {
+      height: auto;
+    }
+
+    .location-name {
+      font-weight: 600;
+    }
+  }
+}

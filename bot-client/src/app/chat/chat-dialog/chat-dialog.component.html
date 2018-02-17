@@ -8,25 +8,9 @@
         </div>
         <div class="chat-message-content">
           <div class="chat-message-author">{{message.bot ? 'Chatbot' : 'Ich'}}</div>
-          {{message.text}}
-          <ul class="chat-message-location-list" *ngIf="message.selectList?.length > 0">
-            <li *ngFor="let select of message.selectList" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-              <div fxFlex="60">{{select}}</div>
-              <div fxFlex="40">
-                <button mat-button (click)="sendMessage(select)">Wählen</button>
-              </div>
-            </li>
-          </ul>
-          <ul class="chat-message-location-list" *ngIf="message.locationsList?.length > 0">
-            <li *ngFor="let location of message.locationsList" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-              <img [src]="location.icon" class="location-icon" alt="icon" fxFlex="7" />
-              <div class="container" fxLayout="column" fxLayoutAlign="start start" fxFlex="93">
-                <div class="location-name">{{location.name}}</div>
-                <app-location-rating [rating]="location.rating"></app-location-rating>
-              </div>
-              <button mat-button (click)="showLocationDetails(location)">Wählen</button>
-            </li>
-          </ul>
+          <span>{{message.text}}</span>
+          <app-selection-list *ngIf="message.selectionList?.length > 0" [selectionList]="message.selectionList"></app-selection-list>
+          <app-locations-list *ngIf="message.locationsList?.length > 0" [locationsList]="message.locationsList"></app-locations-list>
           <app-location-detail *ngIf="message.locationDetail" [location]="message.locationDetail"></app-location-detail>
         </div>
       </li>

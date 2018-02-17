@@ -161,23 +161,6 @@
         font-family: sans-serif;
         line-height: 1.3rem;
         font-size: .9rem;
-
-        ul.chat-message-location-list {
-          margin: 0;
-          margin-top: 1rem;
-          padding: 0;
-          list-style: none;
-
-          li {
-            img.location-icon {
-              height: auto;
-            }
-
-            .location-name {
-              font-weight: 600;
-            }
-          }
-        }
       }
 
       .chat-message-author {

@@ -1,0 +1,10 @@
+<ul class="chat-message-location-list" *ngIf="locationsList?.length > 0">
+  <li *ngFor="let location of locationsList" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <img [src]="location.icon" class="location-icon" alt="icon" fxFlex="7" />
+    <div class="container" fxLayout="column" fxLayoutAlign="start start" fxFlex="93">
+      <div class="location-name">{{location.name}}</div>
+      <app-location-rating [rating]="location.rating"></app-location-rating>
+    </div>
+    <button mat-button (click)="showLocationDetails(location)">Wählen</button>
+  </li>
+</ul>

@@ -27,6 +27,7 @@ export class ChatService {
     this.chatMessages = new BehaviorSubject([]);
     this.isLoading = new BehaviorSubject(true);
     this.possibleAnswers = new BehaviorSubject([]);
+    this.initial();
   }
 
   /**
@@ -39,17 +40,55 @@ export class ChatService {
     });
   }
 
+
+  /**
+   * Initial chat message that comes from the bot.
+   */
+  private initial() {
+    this.getResponse('Hallo').subscribe((r: any) => {
+      this.addMessageToChat({ text: r.result.fulfillment.speech, bot: true });
+      this.possibleAnswers.next(['Ja', 'Nein', 'Wer bist du?']);
+    });
+  }
+
+  /**
+   * Ask the bot for something.
+   * @param input Message text
+   */
+  askBot(input) {
+    this.possibleAnswers.next([]);
+    this.addMessageToChat({ text: input, bot: false });
+    this.getResponse(input).subscribe((r: any) => {
+      console.log(r);
+      r.result.fulfillment.messages.forEach(message => {
+        if (message.speech) {
+          this.addMessageToChat({ text: message.speech, bot: true });
+        }
+        if (message.payload) {
+          if (message.payload.response.types) {
+            const list = message.payload.response.types;
+            this.addMessageToChat({ text: message.speech, bot: true, selectionList: list });
+          }
+          if (message.payload.response.possibleAnswers) {
+            this.possibleAnswers.next(message.payload.response.possibleAnswers);
+          }
+        }
+      });
+      this.checkAction(r.result.action, r.result.parameters);
+    });
+  }
+
   /**
    * Add a new message to the chat log
    * @param message Message text
    * @param isBot Is the message from the bot?
    */
-  addMessageToChat(options: MessageConfig) {
+  private addMessageToChat(options: MessageConfig) {
     this.chatMessages.next([...this.chatMessages.value, {
       id: Math.random(),
       text: options.text,
       locationsList: options.locationsList,
-      selectList: options.selectList,
+      selectionList: options.selectionList,
       bot: options.bot,
       locationDetail: options.locationDetail,
       date: Date.now(),
@@ -102,7 +141,7 @@ export class ChatService {
   /**
    * Get the locations by the given parameters.
    */
-  private getLocations(params) {
+  private getLocations(params: any) {
     this.isLoading.next(true);
     this.places.getCoordinates(params.Location).subscribe((result: any) => {
       if (result.results.length > 0) {

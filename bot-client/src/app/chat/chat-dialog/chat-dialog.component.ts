@@ -23,8 +23,6 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     this.scrollTo();
     this.chatMessages = this.chatService.chatMessages;
-    this.initial();
-
     this.isLoading = this.chatService.isLoading;
     this.possibleAnswers = this.chatService.possibleAnswers;
   }
@@ -43,40 +41,11 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
   }
 
   /**
-   * Initial chat message that comes from the bot.
-   */
-  private initial() {
-    this.chatService.getResponse('Hallo').subscribe((r: any) => {
-      this.chatService.addMessageToChat({ text: r.result.fulfillment.speech, bot: true });
-      this.chatService.possibleAnswers.next(['Ja', 'Nein', 'Wer bist du?']);
-    });
-  }
-
-  /**
    * Add a user message to the chat log and send the message to dialogflow.
    * @param input Message text
    */
   sendMessage(input: string) {
-    this.chatService.possibleAnswers.next([]);
-    this.chatService.addMessageToChat({ text: input, bot: false });
-    this.chatService.getResponse(input).subscribe((r: any) => {
-      console.log(r);
-      r.result.fulfillment.messages.forEach(message => {
-        if (message.speech) {
-          this.chatService.addMessageToChat({ text: message.speech, bot: true });
-        }
-        if (message.payload) {
-          if (message.payload.response.types) {
-            const list = message.payload.response.types;
-            this.chatService.addMessageToChat({ text: message.speech, bot: true, selectList: list });
-          }
-          if (message.payload.response.possibleAnswers) {
-            this.possibleAnswers.next(message.payload.response.possibleAnswers);
-          }
-        }
-      });
-      this.chatService.checkAction(r.result.action, r.result.parameters);
-    });
+    this.chatService.askBot(input);
   }
 
   /**
@@ -86,9 +55,5 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
   chatInputController(input: HTMLInputElement) {
     this.sendMessage(input.value);
     input.value = '';
-  }
-
-  showLocationDetails(location: Location) {
-    this.chatService.showLocationDetails(location);
   }
 }
