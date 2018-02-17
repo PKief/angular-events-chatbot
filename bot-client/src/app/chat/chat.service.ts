@@ -123,11 +123,7 @@ export class ChatService {
             bot: true,
             locationsList: locationsTrimmed
           });
-          this.addMessageToChat({
-            text: 'Frage nach weiteren, wenn du noch mehr brauchst!',
-            bot: true,
-          });
-          this.possibleAnswers.next(['Zeige weitere', 'Vielen Dank']);
+          this.possibleAnswers.next(['Weitere anzeigen', 'Vielen Dank']);
           this.listStartIndex += locationsTrimmed.length;
         });
       }

@@ -22,11 +22,7 @@
               <img [src]="location.icon" class="location-icon" alt="icon" fxFlex="7" />
               <div class="container" fxLayout="column" fxLayoutAlign="start start" fxFlex="93">
                 <div class="location-name">{{location.name}}</div>
-                <div class="location-rating">
-                  <mat-icon *ngFor="let star of getRatingStars(location.rating)">
-                    {{star === 1 ? 'star' : star === 0 ? 'star_half' : 'star_border'}}
-                  </mat-icon>
-                </div>
+                <app-location-rating [rating]="location.rating"></app-location-rating>
               </div>
               <button mat-button (click)="showLocationDetails(location)">Wählen</button>
             </li>
