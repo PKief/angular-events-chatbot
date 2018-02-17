@@ -4,7 +4,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { PlacesService } from './places.service';
 import { Location, MessageConfig } from '../models';
-import { map } from 'rxjs/operators/map';
+import { catchError, map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class ChatService {
@@ -108,7 +110,8 @@ export class ChatService {
     };
     this.isLoading.next(true);
     return this.http.post(`${this.baseURL}`, data, { headers: this.headers }).pipe(
-      map((res) => { this.isLoading.next(false); return res; })
+      map((res) => { this.isLoading.next(false); return res; }),
+      catchError(this.handleError('getResponse', []))
     );
   }
 
@@ -123,6 +126,7 @@ export class ChatService {
         if (params.Location.length === 0) {
           break;
         }
+        this.possibleAnswers.next(['Meinen Standort verwenden']);
         this.getLocations(params);
         break;
       }
@@ -143,9 +147,9 @@ export class ChatService {
    */
   private getLocations(params: any) {
     this.isLoading.next(true);
-    this.places.getCoordinates(params.Location).subscribe((result: any) => {
-      if (result.results.length > 0) {
-        const location = `${result.results[0].geometry.location.lat},${result.results[0].geometry.location.lng}`;
+    this.places.getCoordinates(params.Location).subscribe((coords: any) => {
+      if (coords.results.length > 0) {
+        const location = `${coords.results[0].geometry.location.lat},${coords.results[0].geometry.location.lng}`;
         this.places.getLocations({
           location,
           type: params.EventType,
@@ -207,5 +211,21 @@ export class ChatService {
         locationDetail: location,
       });
     });
+  }
+
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      // console.log(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 }
