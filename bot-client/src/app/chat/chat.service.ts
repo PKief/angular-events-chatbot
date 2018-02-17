@@ -123,10 +123,10 @@ export class ChatService {
     switch (actionType) {
       // search locations
       case 'search.places': {
-        if (params.Location.length === 0) {
+        this.possibleAnswers.next(['Meinen Standort verwenden']);
+        if (!params.Location) {
           break;
         }
-        this.possibleAnswers.next(['Meinen Standort verwenden']);
         this.getLocations(params);
         break;
       }
@@ -147,12 +147,14 @@ export class ChatService {
    */
   private getLocations(params: any) {
     this.isLoading.next(true);
+    console.log(params);
     this.places.getCoordinates(params.Location).subscribe((coords: any) => {
       if (coords.results.length > 0) {
         const location = `${coords.results[0].geometry.location.lat},${coords.results[0].geometry.location.lng}`;
         this.places.getLocations({
           location,
           type: params.EventType,
+          keyword: params.EventKeyword,
         }).subscribe((res: any) => {
           this.isLoading.next(false);
           this.listStartIndex = 0;
@@ -161,13 +163,21 @@ export class ChatService {
           console.log(res.results);
           const locationsTrimmed = this.locationsList.length > this.listAmount ?
             this.locationsList.slice(this.listStartIndex, this.listStartIndex + this.listAmount) : this.locationsList;
-          this.addMessageToChat({
-            text: 'Das hier sind passende Orte:',
-            bot: true,
-            locationsList: locationsTrimmed
-          });
-          this.possibleAnswers.next(['Weitere anzeigen', 'Vielen Dank']);
-          this.listStartIndex += locationsTrimmed.length;
+          if (this.locationsList.length > 0) {
+            this.addMessageToChat({
+              text: 'Das hier sind passende Orte:',
+              bot: true,
+              locationsList: locationsTrimmed
+            });
+            this.possibleAnswers.next(['Weitere anzeigen', 'Vielen Dank']);
+            this.listStartIndex += locationsTrimmed.length;
+          } else {
+            this.addMessageToChat({
+              text: 'Ich konnte leider keine Orte finden 😕',
+              bot: true,
+            });
+            this.possibleAnswers.next(['Etwas anderes machen']);
+          }
         });
       }
     });
