@@ -17,6 +17,7 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
   chatMessages;
   possibleAnswers: Subject<string[]>;
   isLoading: Subject<boolean>;
+  isLoadingPossibleAnswers: Subject<boolean>;
 
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
@@ -24,6 +25,7 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
     this.scrollToBottom();
     this.chatMessages = this.chatService.chatMessages;
     this.isLoading = this.chatService.isLoading;
+    this.isLoadingPossibleAnswers = this.chatService.isLoadingPossibleAnswers;
     this.possibleAnswers = this.chatService.possibleAnswers;
   }
 
@@ -45,7 +47,11 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
    * @param input Message text
    */
   sendMessage(input: string) {
-    this.chatService.askBot(input);
+    if (input === 'Meinen Standort bestimmen') {
+      this.chatService.getMyLocation();
+    } else {
+      this.chatService.askBot(input);
+    }
   }
 
   /**

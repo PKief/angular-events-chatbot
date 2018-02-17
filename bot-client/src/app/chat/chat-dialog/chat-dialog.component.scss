@@ -42,6 +42,12 @@
           button {
             height: 100%;
           }
+
+          app-loading-spinner {
+            position: absolute;
+            left: 1rem;
+            top: .8rem;
+          }
         }
       }
     }

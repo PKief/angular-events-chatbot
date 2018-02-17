@@ -32,6 +32,9 @@
       <li *ngFor="let answer of (possibleAnswers | async)">
         <button mat-button (click)="sendMessage(answer)">{{answer}}</button>
       </li>
+      <li *ngIf="isLoadingPossibleAnswers | async">
+        <app-loading-spinner></app-loading-spinner>
+      </li>
     </ul>
     <mat-form-field floatPlaceholder="never" color="accent">
       <textarea matInput #chatInput (keyup.enter)="chatInputController(chatInput)" placeholder="Frag mich etwas..." matTextareaAutosize

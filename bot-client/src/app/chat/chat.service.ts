@@ -17,10 +17,12 @@ export class ChatService {
   possibleAnswers: BehaviorSubject<string[]>;
   locationsList: Location[];
   currentLocation: Location;
+  usersAddress: string;
   private listStartIndex = 0;
   private listAmount = 4;
 
   isLoading: BehaviorSubject<boolean>;
+  isLoadingPossibleAnswers: BehaviorSubject<boolean>;
 
   constructor(
     private readonly http: HttpClient,
@@ -28,6 +30,7 @@ export class ChatService {
   ) {
     this.chatMessages = new BehaviorSubject([]);
     this.isLoading = new BehaviorSubject(true);
+    this.isLoadingPossibleAnswers = new BehaviorSubject(false);
     this.possibleAnswers = new BehaviorSubject([]);
     this.initial();
   }
@@ -123,7 +126,11 @@ export class ChatService {
     switch (actionType) {
       // search locations
       case 'search.places': {
-        this.possibleAnswers.next(['Meinen Standort verwenden']);
+        const addressSuggestions = ['Meinen Standort bestimmen']
+        if (this.usersAddress && this.usersAddress.length > 0) {
+          addressSuggestions.push(this.usersAddress);
+        }
+        this.possibleAnswers.next(addressSuggestions);
         if (!params.Location) {
           break;
         }
@@ -237,5 +244,28 @@ export class ChatService {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
+  }
+
+  /** 
+   * Find out location of the user.
+  */
+  getMyLocation() {
+    this.possibleAnswers.next([]);
+    this.isLoadingPossibleAnswers.next(true);
+    return new Promise((resolve, reject) => {
+      this.places.getGeoLocation().then(coords => {
+        this.places.getCoordinates(`${coords.latitude},${coords.longitude}`).subscribe(result => {
+          const address = result['results'][0]['formatted_address'];
+          this.usersAddress = address;
+          this.isLoadingPossibleAnswers.next(false);
+          this.possibleAnswers.next([address]);
+          resolve(address);
+        });
+      }).catch(err => {
+        this.isLoadingPossibleAnswers.next(false);
+        console.error(err);
+        reject(err);
+      });
+    })
   }
 }
