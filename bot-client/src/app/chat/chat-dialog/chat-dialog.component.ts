@@ -21,20 +21,20 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
   ngOnInit() {
-    this.scrollTo();
+    this.scrollToBottom();
     this.chatMessages = this.chatService.chatMessages;
     this.isLoading = this.chatService.isLoading;
     this.possibleAnswers = this.chatService.possibleAnswers;
   }
 
   ngAfterViewChecked() {
-    this.scrollTo();
+    this.scrollToBottom();
   }
 
   /**
    * Always scroll chat window to the  to see latest chat messages.
    */
-  scrollTo(): void {
+  scrollToBottom(): void {
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
     } catch (err) { }
