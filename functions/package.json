@@ -13,6 +13,7 @@
   "dependencies": {
     "@google/maps": "^0.4.5",
     "cors": "^2.8.4",
+    "dotenv": "^5.0.0",
     "express": "^4.16.2",
     "firebase-admin": "~5.8.1",
     "firebase-functions": "^0.8.1"

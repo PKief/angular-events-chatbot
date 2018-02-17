@@ -3,10 +3,14 @@ import * as express from 'express';
 import * as googleMaps from '@google/maps';
 import * as https from 'https';
 import * as cors from 'cors';
+require('dotenv').config();
+
 const Stream = require('stream').Transform;
 
 const app: express.Application = express();
 app.use(cors());
+
+const googleApiKey = process.env.GOOGLE_KEY;
 
 app.get('/places', (request: any, response: any) => {
     const query = {
@@ -16,7 +20,7 @@ app.get('/places', (request: any, response: any) => {
         keyword: request.query.keyword,
     }
 
-    https.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${query.location}&radius=${query.radius}&type=${query.type}&keyword=${query.keyword}&key=AIzaSyD58SIp-bmdg2tys7ilDI6e0uZIzmkTRoM`, (res) => {
+    https.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${query.location}&radius=${query.radius}&type=${query.type}&keyword=${query.keyword}&key=${googleApiKey}`, (res) => {
         res.setEncoding("utf8");
         let body = "";
         res.on("data", data => {
@@ -36,7 +40,7 @@ app.get('/places/details', (request: any, response: any) => {
         placeid: request.query.placeid
     }
 
-    https.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${query.placeid}&key=AIzaSyD58SIp-bmdg2tys7ilDI6e0uZIzmkTRoM`, (res) => {
+    https.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${query.placeid}&key=${googleApiKey}`, (res) => {
         res.setEncoding("utf8");
         let body = "";
         res.on("data", data => {
@@ -56,7 +60,7 @@ app.get('/geocode', (request: any, response: any) => {
         location: request.query.location
     }
 
-    https.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${query.location}&key=AIzaSyD58SIp-bmdg2tys7ilDI6e0uZIzmkTRoM`, (res) => {
+    https.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${query.location}&key=${googleApiKey}`, (res) => {
         res.setEncoding("utf8");
         let body = "";
         res.on("data", data => {
