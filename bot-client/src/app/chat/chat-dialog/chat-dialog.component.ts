@@ -59,7 +59,9 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
    * @param input The input element of the chat window or a text string.
    */
   chatInputController(input: HTMLInputElement) {
-    this.sendMessage(input.value);
+    if (input.value.trim().length > 0) {
+      this.sendMessage(input.value);
+    }
     input.value = '';
   }
 }

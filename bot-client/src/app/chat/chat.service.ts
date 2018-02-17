@@ -88,7 +88,7 @@ export class ChatService {
    * @param message Message text
    * @param isBot Is the message from the bot?
    */
-  private addMessageToChat(options: MessageConfig) {
+  addMessageToChat(options: MessageConfig) {
     this.chatMessages.next([...this.chatMessages.value, {
       id: Math.random(),
       text: options.text,
@@ -97,6 +97,7 @@ export class ChatService {
       bot: options.bot,
       locationDetail: options.locationDetail,
       date: Date.now(),
+      title: options.title,
     }]);
   }
 
@@ -219,13 +220,14 @@ export class ChatService {
    */
   showLocationDetails(location: Location) {
     this.isLoading.next(true);
-    this.places.getLocationDetail(location.place_id).subscribe((result: any) => {
+    this.places.getLocationDetail(location.place_id).subscribe((response: any) => {
+      this.possibleAnswers.next(['Zu Favoriten hinzufügen ❤️', 'Alternativen zeigen']);
       this.isLoading.next(false);
-      console.log(result);
-      this.currentLocation = result;
+      console.log(response);
+      this.currentLocation = response.result;
       this.addMessageToChat({
         bot: true,
-        locationDetail: location,
+        locationDetail: response.result,
       });
     });
   }

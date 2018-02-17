@@ -19,4 +19,15 @@ export interface Location {
   scope: string;
   types: string[];
   vicinity: string;
+  address_components: any,
+  adr_address: string;
+  formatted_address: string;
+  opening_hours: {
+    open_now: boolean;
+    periods: any[],
+    weekday_text: string[],
+  },
+  price_level: number;
+  website: string;
+  url: string;
 }

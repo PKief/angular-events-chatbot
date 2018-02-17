@@ -2,4 +2,20 @@
   <h2>
     {{location.name}}
   </h2>
+  <div class="state">
+    Status:
+    <span class="state-open" *ngIf="location.opening_hours?.open_now">geöffnet</span>
+    <span class="state-closed" *ngIf="!location.opening_hours?.open_now">geschlossen</span>
+  </div>
+  <app-location-rating [rating]="location.rating"></app-location-rating>
+  <p>
+    Was möchtest du wissen?
+  </p>
+  <div class="detail-buttons">
+    <a mat-button (click)="showDetailInformation('Adresse', location.formatted_address)">Adresse</a>
+    <a mat-button (click)="openApproach()">Anfahrt</a>
+    <a mat-button (click)="showDetailInformation('Kontakt', 'Tel. ' + location.formatted_phone_number)">Kontakt</a>
+    <a mat-button [href]="location.website" target="_blank">Webseite</a>
+    <a mat-button>Öffnungszeiten</a>
+  </div>
 </div>
