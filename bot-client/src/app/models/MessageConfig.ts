@@ -7,4 +7,5 @@ export interface MessageConfig {
   locationsList?: Location[];
   locationDetail?: Location;
   bot: boolean;
+  textAsHtml?: string;
 }

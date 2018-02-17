@@ -22,6 +22,7 @@ export interface Location {
   address_components: any,
   adr_address: string;
   formatted_address: string;
+  formatted_phone_number: string;
   opening_hours: {
     open_now: boolean;
     periods: any[],

@@ -92,6 +92,7 @@ export class ChatService {
     this.chatMessages.next([...this.chatMessages.value, {
       id: Math.random(),
       text: options.text,
+      textAsHtml: options.textAsHtml,
       locationsList: options.locationsList,
       selectionList: options.selectionList,
       bot: options.bot,

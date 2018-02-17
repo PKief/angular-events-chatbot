@@ -10,6 +10,7 @@
           <div class="chat-message-author">{{message.bot ? 'Chatbot' : 'Ich'}}</div>
           <h3 *ngIf="message.title">{{message.title}}</h3>
           <span>{{message.text}}</span>
+          <div *ngIf="message.textAsHtml" [innerHTML]="message.textAsHtml"></div>
           <app-selection-list *ngIf="message.selectionList?.length > 0" [selectionList]="message.selectionList"></app-selection-list>
           <app-locations-list *ngIf="message.locationsList?.length > 0" [locationsList]="message.locationsList"></app-locations-list>
           <app-location-detail *ngIf="message.locationDetail" [location]="message.locationDetail"></app-location-detail>
