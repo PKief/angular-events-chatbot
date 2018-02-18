@@ -1,6 +1,8 @@
 # Angular Events Chatbot
 
-A chatbot that provides you some interesting locations in your neighborhood. You are bored and want to do something?
+A chatbot that provides you some interesting locations in your neighborhood. 
+
+You are bored and want to do something?
 
 > Just ask the bot:
 <a href="https://events-chatbot.firebaseapp.com/" target="_blank">https://events-chatbot.firebaseapp.com</a>
@@ -29,7 +31,7 @@ or more precisely:
 be kind:
 
 - "Danke schön"
-- "Du bist der beste"
+- "Du bist der Beste"
 
 make smalltalk:
 
@@ -66,24 +68,22 @@ and it is even possible to let the bot find out your current position:
 The chatbot is based on the [Angular Framework](https://angular.io/). It was created and implemented with the help of [Angular CLI](https://cli.angular.io/) and [Angular Material](https://material.angular.io/).
 
 ### Dialogflow
-To understand what the user is actually saying the bot sends the input message from the user to [Dialogflow](https://dialogflow.com/). Dialogflow helps the bot to create a conversation with the user. Furthermore it enables the bot to behave natural, i.e. answer with different answers and react properly to the user's questions. It also send the user some suggestions how he could answer to questions of the bot.
+To understand what the user is actually saying the bot sends the input message to [Dialogflow](https://dialogflow.com/). Dialogflow helps the bot to create an interactive and dynamic conversation with the user. Next it enables the bot to behave natural, i.e. the bot answers differently to same questions. The bot also provides the user with suggestions for possible next interaction steps.
 
 ### Firebase Functions
-The chatbot uses the Firebase Functions for the backend functionality. The backend is very small and is only used as a proxy for the Google Places API.
+The chatbot uses [Firebase Functions](https://firebase.google.com/docs/functions/) for the backend functionality. The backend is very simple and only used as a proxy for the Google Places API to avoid CORS issues.
 
-Using the [Express](https://expressjs.com/) node library, the functions provide some APIs to call the Google Places APIs to get the requested information about locations.
+The functions provide some APIs to call the Google Places APIs to get the requested information about locations. The [Express](https://expressjs.com/) library is used here.
 
 ### HTML5 Web Storage
-With the HTML5 local storage technology the bot caches some user informations. The following two informations are cached there:
+The HTML5 local storage is used to provide a straightforward usage of the bot without many barriers such as authentication or user sessions. Basically the following information is cached in the local storage:
 
-- Design Theme
-- Locations that are favored by the user
-
-It would be also possible to save this data in a real database in the backend. But I decided to make the bot very lightweighted without lots of serverside stuff like authentication or user sessions. This makes it very easy to try out the bot without big barriers for the user.
+- Favored locations
+- Design theme
 
 ### Overview
 
-The following image gives you a short overview about the underlying technologies of the chatbot:
+The following image gives a short overview of the underlying technologies of the chatbot:
 
 <p align="center">    
     <img src="images/architecture.png" alt="architecture image" width="700px"/>
@@ -92,18 +92,26 @@ The following image gives you a short overview about the underlying technologies
 ## Development
 
 ### Node.js
-- Install [Node.js](https://nodejs.org/en/) on your computer.
+- Install [Node.js](https://nodejs.org/en/) on your machine.
 
 ### Angular
-The bot is implemented as an Angular web application. To start the application navigate into the `bot-client`-directory and run the following command in your terminal:
+The bot is implemented as an Angular web application. To start the application navigate into the `bot-client`-directory and run the following commands in your terminal:
 
+Install the required modules:
+```
+npm install
+```
+
+Run the application:
 ```
 npm start
 ```
 
 This command creates a small development server which is running in your browser: [http://localhost:4200/](http://localhost:4200/).
 
-You can also install Angular CLI globally with this command:
+
+#### Angular CLI
+You can install Angular CLI globally with this command:
 
 ```
 npm install @angular/cli --global
@@ -120,14 +128,52 @@ npm run build
 This creates a `dist`-folder containing the bundled files that can be uploaded to a web server.
 
 ### Dialogflow
-This application is so configured that is uses a specific token to get access to the firebase project. The token cannot be used for other purposes. If you want your own firebase project you have to change the access token.
+This application is so configured that is uses a specific token to get access to the dialogflow project. The token cannot be used for other projects.
 
-The token can be found in the `/bot-client/src/environments`-directory in the `environment.ts`-file.
+Tokens can be found in the `/bot-client/src/environments`-directory in the `environment.ts`-file.
 
 ### Google API
-
 For the Google Places API is an authentication token required. You have to [create your own access key](https://developers.google.com/maps/documentation/javascript/get-api-key?hl=de). Create a `.env`-file in the `functions`-directory and insert the token like this:
 
 ```
 GOOGLE_KEY=MY_ACCESS_TOKEN
 ```
+
+### Firebase
+The functions and the hosting can be simulated during development. Navigate into the `functions`-folder and open a terminal there.
+
+Install packages:
+
+```
+npm install
+```
+
+```
+npm install firebase-tools -g
+```
+
+Setup firebase:
+
+```
+firebase login
+```
+
+```
+firebase use --add
+```
+
+Start simulation of functions:
+
+```
+npm run serve
+```
+
+Deploy the project:
+
+```
+firebase deploy
+```
+
+---
+
+*This document was written by Philipp Kief in 2018*
