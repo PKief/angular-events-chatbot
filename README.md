@@ -51,7 +51,7 @@ and it is even possible to let the bot find out your current position:
 
 <img src="./images/get_my_location.gif" alt="get my location" width="350px">
 
-### Screen shots
+## Screenshots
 
 <p align="center">
     <img src="./images/screenshot_01.png" alt="get my location" width="30%">
@@ -61,12 +61,6 @@ and it is even possible to let the bot find out your current position:
 
 
 ## Architecture
-
-The following image gives you a short overview about the underlying technologies of the chatbot:
-
-<p align="center">    
-    <img src="images/architecture.png" alt="architecture image" width="700px"/>
-</p>
 
 ### Angular
 The chatbot is based on the [Angular Framework](https://angular.io/). It was created and implemented with the help of [Angular CLI](https://cli.angular.io/) and [Angular Material](https://material.angular.io/).
@@ -86,6 +80,14 @@ With the HTML5 local storage technology the bot caches some user informations. T
 - Locations that are favored by the user
 
 It would be also possible to save this data in a real database in the backend. But I decided to make the bot very lightweighted without lots of serverside stuff like authentication or user sessions. This makes it very easy to try out the bot without big barriers for the user.
+
+### Overview
+
+The following image gives you a short overview about the underlying technologies of the chatbot:
+
+<p align="center">    
+    <img src="images/architecture.png" alt="architecture image" width="700px"/>
+</p>
 
 ## Development
 
