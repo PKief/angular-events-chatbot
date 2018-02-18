@@ -53,6 +53,23 @@ and it is even possible to let the bot find out your current position:
 
 <img src="./images/get_my_location.gif" alt="get my location" width="350px">
 
+#### What should I do with a selected location?
+
+Save your favored location:
+
+- "Favorisiere das"
+- "Merke dir diesen Ort"
+
+Show you favored locations:
+
+- "Zeige meine Favoriten"
+- "Was sind meine Favoriten?"
+
+Remove favored location:
+
+- "Entferne das aus den Favoriten"
+- "Lösche diesen Favoriten"
+
 ## Screenshots
 
 <p align="center">
@@ -92,7 +109,7 @@ The following image gives a short overview of the underlying technologies of the
 ## Development
 
 ### Node.js
-- Install [Node.js](https://nodejs.org/en/) on your machine.
+Install [Node.js](https://nodejs.org/en/) on your machine.
 
 ### Angular
 The bot is implemented as an Angular web application. To start the application navigate into the `bot-client`-directory and run the following commands in your terminal:
