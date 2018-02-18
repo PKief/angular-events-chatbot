@@ -12,7 +12,9 @@ A chatbot that provides you some interesting locations in your neighborhood. You
 </p>
 
 ## Use cases
-You can ask the bot multiple questions and he will react properly. Possible questions you can ask the bot (only German):
+You can ask the bot multiple questions and he will react properly. 
+
+Possible questions you can ask the bot (only German):
 
 - "Wie kannst du mir helfen?"
 - "Wer bist du?"
@@ -21,7 +23,7 @@ You can ask the bot multiple questions and he will react properly. Possible ques
 
 or more precisely:
 
-- "Ich will pizza essen gehen"
+- "Ich will Pizza essen gehen"
 - "Ich will in Karlsruhe Pizza essen gehen"
 
 be kind:
@@ -48,6 +50,15 @@ or where you want to search the locations:
 and it is even possible to let the bot find out your current position:
 
 <img src="./images/get_my_location.gif" alt="get my location" width="350px">
+
+### Screen shots
+
+<p align="center">
+    <img src="./images/screenshot_01.png" alt="get my location" width="30%">
+    <img src="./images/screenshot_02.png" alt="get my location" width="30%">
+    <img src="./images/screenshot_03.png" alt="get my location" width="30%">
+</p>
+
 
 ## Architecture
 
