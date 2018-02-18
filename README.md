@@ -2,8 +2,7 @@
 
 A chatbot that provides you some interesting locations in your neighborhood. You are bored and want to do something?
 
-Just ask the bot:
-
+> Just ask the bot:
 <a href="https://events-chatbot.firebaseapp.com/" target="_blank">https://events-chatbot.firebaseapp.com</a>
 
 ## Components
@@ -30,7 +29,18 @@ be kind:
 - "Danke schön"
 - "Du bist der beste"
 
-For the question where you want to search the locations:
+make smalltalk:
+
+- "Wie geht es dir?"
+- "Wie heißt du?"
+
+or send smileys:
+
+- ":)"
+- "xD"
+- "lol"
+
+or where you want to search the locations:
 
 - "Ich wohne in Karlsruhe"
 - "Karlsruhe"
