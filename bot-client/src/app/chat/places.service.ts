@@ -6,8 +6,6 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
-declare var google: any;
-
 @Injectable()
 export class PlacesService {
   private baseURL = 'https://us-central1-events-chatbot.cloudfunctions.net/api';

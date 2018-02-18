@@ -1,11 +1,8 @@
 import * as functions from 'firebase-functions';
 import * as express from 'express';
-import * as googleMaps from '@google/maps';
 import * as https from 'https';
 import * as cors from 'cors';
 require('dotenv').config();
-
-const Stream = require('stream').Transform;
 
 const app: express.Application = express();
 app.use(cors());
