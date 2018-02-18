@@ -1,6 +1,10 @@
 {
   "hosting": {
     "public": "bot-client/dist",
+    "predeploy": [
+      "npm --prefix bot-client run lint",
+      "npm --prefix bot-client run build"
+    ],
     "rewrites": [
       {
         "source": "/places",
