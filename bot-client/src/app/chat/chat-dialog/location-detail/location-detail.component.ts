@@ -42,7 +42,7 @@ export class LocationDetailComponent implements OnInit {
 
   showOpeningHours() {
     let openingHours = '';
-    if (this.location.opening_hours.weekday_text) {
+    if (this.location.opening_hours && this.location.opening_hours.weekday_text) {
       openingHours += '<ul>';
       this.location.opening_hours.weekday_text.forEach(t => {
         openingHours += `<li>
