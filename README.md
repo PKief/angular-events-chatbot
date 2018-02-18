@@ -6,6 +6,12 @@ Just ask the bot:
 
 <a href="https://events-chatbot.firebaseapp.com/" target="_blank">https://events-chatbot.firebaseapp.com</a>
 
+## Components
+
+<p align="center">
+    <img src="./images/components.png" alt="components" width="700px"/>
+</p>
+
 ## Use cases
 You can ask the bot multiple questions and he will react properly. Possible questions you can ask the bot (only German):
 
@@ -37,7 +43,9 @@ and it is even possible to let the bot find out your current position:
 
 The following image gives you a short overview about the underlying technologies of the chatbot:
 
-<img src="images/architecture.png" alt="architecture image" width="600px"/>
+<p align="center">    
+    <img src="images/architecture.png" alt="architecture image" width="700px"/>
+</p>
 
 ### Angular
 The chatbot is based on the [Angular Framework](https://angular.io/). It was created and implemented with the help of [Angular CLI](https://cli.angular.io/) and [Angular Material](https://material.angular.io/).
