@@ -128,7 +128,7 @@ export class ChatService {
     switch (actionType) {
       // search locations
       case 'search.places': {
-        const addressSuggestions = ['Meinen Standort bestimmen']
+        const addressSuggestions = ['Meinen Standort bestimmen'];
         if (this.usersAddress && this.usersAddress.length > 0) {
           addressSuggestions.push(this.usersAddress);
         }
@@ -270,7 +270,7 @@ export class ChatService {
     });
   }
 
-  /** 
+  /**
    * Find out location of the user.
   */
   getMyLocation() {
@@ -291,7 +291,7 @@ export class ChatService {
         console.error(err);
         reject(err);
       });
-    })
+    });
   }
 
   /**

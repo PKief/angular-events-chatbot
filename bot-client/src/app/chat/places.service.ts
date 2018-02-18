@@ -15,7 +15,7 @@ export class PlacesService {
 
   constructor(private readonly http: HttpClient) { }
 
-  /** 
+  /**
    * Get the current location of the user.
   */
   getGeoLocation(): Promise<Coordinates> {

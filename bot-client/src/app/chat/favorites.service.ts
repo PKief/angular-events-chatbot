@@ -31,7 +31,7 @@ export class FavoritesService {
     return this.favoriteList.value;
   }
 
-  /** 
+  /**
    * Add the current (selected) location to the favorites.
   */
   favorCurrentLocation(location: Location) {
@@ -50,7 +50,7 @@ export class FavoritesService {
   removeFavorite(location: Location) {
     if (this.isFavorite(location)) {
       this.favoriteList.next(this.favorites.filter(f => f.id !== location.id));
-      return `${location.name} wurde von deinen Favoriten gelöscht!`
+      return `${location.name} wurde von deinen Favoriten gelöscht!`;
     } else {
       return `${location.name} ist noch kein Favorit!`;
     }

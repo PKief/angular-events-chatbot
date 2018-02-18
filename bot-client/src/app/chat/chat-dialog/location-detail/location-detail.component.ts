@@ -25,6 +25,7 @@ export class LocationDetailComponent implements OnInit {
   showAddress() {
     this.chatService.addMessageToChat({
       bot: true,
+      // tslint:disable-next-line:max-line-length
       textAsHtml: this.location.formatted_address ? `<a href="https://www.google.com/maps/search/?api=1&query=${this.location.formatted_address}" target="_blank">${this.location.formatted_address}</a>` : 'Keine Angaben vorhanden!',
       title: 'Adresse',
     });
@@ -33,6 +34,7 @@ export class LocationDetailComponent implements OnInit {
   showPhone() {
     this.chatService.addMessageToChat({
       bot: true,
+      // tslint:disable-next-line:max-line-length
       textAsHtml: this.location.formatted_phone_number ? `<a href="tel:${this.location.formatted_phone_number}">${this.location.formatted_phone_number}</a>` : 'Keine Angaben vorhanden!',
       title: 'Kontakt',
     });
@@ -45,8 +47,8 @@ export class LocationDetailComponent implements OnInit {
       this.location.opening_hours.weekday_text.forEach(t => {
         openingHours += `<li>
           ${t}
-        </li>`
-      })
+        </li>`;
+      });
       openingHours += '</ul>';
     }
     this.chatService.addMessageToChat({
