@@ -45,12 +45,18 @@
   .social-media-buttons {
     margin-top: 1rem;
 
+    mat-icon {
+      line-height: 1.3rem;
+      padding-right: .2rem;
+    }
+
     .mat-raised-button {
       background-color: #1b95e0;
       color: #ffffff;
     }
 
-    .github-button{
+    .github-button {
+      margin-left: 1rem;
       background-color: #757575;
       color: #ffffff;
     }

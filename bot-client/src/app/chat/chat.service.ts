@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { PlacesService } from './places.service';
-import { Location, MessageConfig } from '../models';
-import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { catchError, map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
+import { Location, MessageConfig } from '../models';
 import { FavoritesService } from './favorites.service';
+import { PlacesService } from './places.service';
 
 @Injectable()
 export class ChatService {

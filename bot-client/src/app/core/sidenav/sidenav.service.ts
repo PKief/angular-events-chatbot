@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatSidenav } from '@angular/material';
+import { MatDrawerToggleResult, MatSidenav } from '@angular/material';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -18,18 +18,18 @@ export class SidenavService {
   /**
    * Open this sidenav, and return a Promise that will resolve when it's fully opened (or get rejected if it didn't).
    *
-   * @returns Promise<void>
+   * @returns Promise<MatDrawerToggleResult>
    */
-  public open(): Promise<void> {
+  public open(): Promise<MatDrawerToggleResult> {
     return this.sidenav.open();
   }
 
   /**
    * Close this sidenav, and return a Promise that will resolve when it's fully closed (or get rejected if it didn't).
    *
-   * @returns Promise<void>
+   * @returns Promise<MatDrawerToggleResult>
    */
-  public close(): Promise<void> {
+  public close(): Promise<MatDrawerToggleResult> {
     return this.sidenav.close();
   }
 
@@ -38,16 +38,16 @@ export class SidenavService {
    *
    * @param {boolean} isOpen  Whether the sidenav should be open.
    *
-   * @returns {Promise<void>}
+   * @returns {Promise<MatDrawerToggleResult>}
    */
-  public toggle(isOpen?: boolean): Promise<void> {
+  public toggle(isOpen?: boolean): Promise<MatDrawerToggleResult> {
     return this.sidenav.toggle(isOpen);
   }
 
   constructor(private router: Router) {
     // close sidenav when the user navigates
     router.events.subscribe((val) => {
-        this.close();
+      this.close();
     });
   }
 }

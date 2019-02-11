@@ -1,15 +1,13 @@
-import { Injectable } from '@angular/core';
-import { environment } from './../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LocationConfig } from '../models';
-import { catchError, map, tap } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { catchError } from 'rxjs/operators';
+import { LocationConfig } from '../models';
 
 @Injectable()
 export class PlacesService {
   private baseURL = 'https://us-central1-events-chatbot.cloudfunctions.net/api';
-  private client: any;
 
   constructor(private readonly http: HttpClient) { }
 

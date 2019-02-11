@@ -190,7 +190,3 @@ Deploy the project:
 ```
 firebase deploy
 ```
-
----
-
-*This document was written by Philipp Kief in 2018*
