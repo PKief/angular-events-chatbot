@@ -11,15 +11,15 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "cors": "^2.8.4",
-    "dotenv": "^5.0.0",
-    "express": "^4.16.2",
-    "firebase-admin": "~5.8.1",
-    "firebase-functions": "^0.8.1"
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "firebase-admin": "~7.0.0",
+    "firebase-functions": "^2.2.0"
   },
   "devDependencies": {
-    "tslint": "^5.8.0",
-    "typescript": "^2.5.3"
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.3"
   },
   "private": true
 }
