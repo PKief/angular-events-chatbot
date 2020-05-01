@@ -19,7 +19,7 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
   isLoading: Subject<boolean>;
   isLoadingPossibleAnswers: Subject<boolean>;
 
-  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+  @ViewChild('scrollMe', { static: true }) private myScrollContainer: ElementRef;
 
   ngOnInit() {
     this.scrollToBottom();

@@ -1,10 +1,6 @@
 {
   "name": "events-chatbot",
   "version": "0.0.0",
-  "license": "MIT",
-  "author": {
-    "name": "Philipp Kief"
-  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -15,34 +11,32 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^7.2.4",
-    "@angular/cdk": "^7.3.1",
-    "@angular/common": "^7.2.4",
-    "@angular/compiler": "^7.2.4",
-    "@angular/core": "^7.2.4",
-    "@angular/flex-layout": "^7.0.0-beta.23",
-    "@angular/forms": "^7.2.4",
-    "@angular/http": "^7.2.4",
-    "@angular/material": "^7.3.1",
-    "@angular/platform-browser": "^7.2.4",
-    "@angular/platform-browser-dynamic": "^7.2.4",
-    "@angular/router": "^7.2.4",
+    "@angular/animations": "^9.1.4",
+    "@angular/cdk": "^8.2.3",
+    "@angular/common": "^9.1.4",
+    "@angular/compiler": "^9.1.4",
+    "@angular/core": "^9.1.4",
+    "@angular/flex-layout": "^9.0.0-beta.29",
+    "@angular/forms": "^9.1.4",
+    "@angular/material": "^8.2.3",
+    "@angular/platform-browser": "^9.1.4",
+    "@angular/platform-browser-dynamic": "^9.1.4",
+    "@angular/router": "^9.1.4",
     "core-js": "^2.6.4",
     "hammerjs": "^2.0.8",
-    "rxjs": "^6.4.0",
-    "tslib": "^1.9.0",
-    "zone.js": "^0.8.29",
-    "rxjs-compat": "^6.0.0-rc.0"
+    "rxjs": "^6.5.5",
+    "tslib": "^1.10.0",
+    "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.13.0",
-    "@angular/cli": "7.3.1",
-    "@angular/compiler-cli": "^7.2.4",
-    "@angular/language-service": "^7.2.4",
+    "@angular-devkit/build-angular": "~0.901.4",
+    "@angular/cli": "9.1.4",
+    "@angular/compiler-cli": "^9.1.4",
+    "@angular/language-service": "^9.1.4",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.6",
-    "@types/node": "~10.12.24",
-    "codelyzer": "^4.5.0",
+    "@types/node": "^12.11.1",
+    "codelyzer": "^5.1.2",
     "jasmine-core": "~3.3.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.0.0",
@@ -53,6 +47,6 @@
     "protractor": "~5.4.2",
     "ts-node": "~8.0.2",
     "tslint": "~5.12.1",
-    "typescript": "~3.2.0"
+    "typescript": "~3.8.3"
   }
 }
